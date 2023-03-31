@@ -7,6 +7,8 @@ public class PlayerMovement : MonoBehaviour
     public CharacterController controller;
 
     public float speed = 12f;
+    public float sprintMultiplier;
+
     public float gravity = -9.81f;
 
     public Transform groundCheck;
@@ -23,6 +25,10 @@ public class PlayerMovement : MonoBehaviour
 
         Vector3 move = transform.right * x + transform.forward * z;
 
+        if(Input.GetKey(KeyCode.LeftShift)) {
+            Debug.Log("sprinting");
+            move *= sprintMultiplier;
+        }
         controller.Move(move * speed * Time.deltaTime);
 
         

@@ -4,15 +4,18 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public bool jas = false;
+    public bool mondkapje = true;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+    private void Update() {
+        if(Input.GetKeyDown(KeyCode.Tab)) {
+            if(mondkapje) {
+                mondkapje = false;
+                jas = true;
+            } else {
+                mondkapje = true;
+                jas = false;
+            }
+        }
     }
 }
