@@ -18,6 +18,11 @@ public class PlayerMovement : MonoBehaviour
 
     private Vector3 velocity;
     private bool grounded;
+    private GameManager gameManager;
+
+    private void Start() {
+        gameManager = FindObjectOfType<GameManager>();
+    }
 
     private void Update() {
         float x = Input.GetAxis("Horizontal");
@@ -25,8 +30,7 @@ public class PlayerMovement : MonoBehaviour
 
         Vector3 move = transform.right * x + transform.forward * z;
 
-        if(Input.GetKey(KeyCode.LeftShift)) {
-            Debug.Log("sprinting");
+        if(Input.GetKey(gameManager.sprintKey)) {
             move *= sprintMultiplier;
         }
         controller.Move(move * speed * Time.deltaTime);

@@ -45,11 +45,11 @@ public class Kleding : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.E)) {
             if(!jasAan) {
                 jasAan = true;
-                anim.Play("JasAan", 1);
+                anim.Play("JasAan", 2);
             }
             else { 
                 jasAan = false;
-                anim.Play("JasAf", 1);
+                anim.Play("JasAf", 2);
             }
         }
     }
