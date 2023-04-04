@@ -19,15 +19,29 @@ public class PlayerMovement : MonoBehaviour
     private Vector3 velocity;
     private bool grounded;
     private GameManager gameManager;
+    private InputManager inputManager;
 
     private void Start() {
         gameManager = FindObjectOfType<GameManager>();
+        inputManager = FindObjectOfType<InputManager>();
     }
 
     private void Update() {
-        float x = Input.GetAxis("Horizontal");
-        float z = Input.GetAxis("Vertical");
-
+        float x = 0f;
+        float z = 0f;
+        //Vertical Inputs
+        if(Input.GetKey(inputManager.forwardKey)) {
+            z = 1f;
+        } else if(Input.GetKey(inputManager.backwardKey)) {
+            z = -1f;
+        }
+        //Horizontal Inputs
+        if(Input.GetKey(inputManager.rightKey)) {
+            x = 1f;
+        }
+        else if(Input.GetKey(inputManager.leftKey)) {
+            x = -1f;
+        }
         Vector3 move = transform.right * x + transform.forward * z;
 
         if(Input.GetKey(gameManager.sprintKey)) {

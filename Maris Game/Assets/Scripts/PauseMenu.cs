@@ -14,7 +14,7 @@ public class PauseMenu : MonoBehaviour
         pauseMenuUI = GameObject.Find("Pause Menu");
         pauseMenuUI.SetActive(false);
         gameManager = FindObjectOfType<GameManager>();
-        inputManager = FindObjectOfType<InputManager>();
+        inputManager = gameManager.inputManager;
     }
 
     private void Update() {
@@ -39,6 +39,6 @@ public class PauseMenu : MonoBehaviour
     }
 
     public void ChangeSens(Slider slider) {
-        gameManager.ChangeSens(slider);
+        inputManager.ChangeSens(slider);
     }
 }

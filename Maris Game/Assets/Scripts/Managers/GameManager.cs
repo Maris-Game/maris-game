@@ -9,10 +9,7 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance;
     public bool paused;
     public LocalManager localManager;
-
-    [Header("Settings")]
-    public float sensX;
-    public float sensY;
+    public InputManager inputManager { get; private set; }
 
     [Header("Controls")]
     public KeyCode sprintKey = KeyCode.LeftShift;
@@ -26,8 +23,9 @@ public class GameManager : MonoBehaviour
         }
 
         Instance = this;
-        DontDestroyOnLoad(this.gameObject);
-        localManager = FindObjectOfType<LocalManager>();
+        inputManager = GetComponent<InputManager>();
+        OnSceneLoaded();
+        
     }
 
     public void OnSceneLoaded() {
@@ -38,17 +36,6 @@ public class GameManager : MonoBehaviour
     private void Update() {
         
     }
-
-    
-
-    public void ChangeSens(Slider slider) {
-        if(slider.name =="SensX Slider") {
-            sensX = slider.value;
-        } else if(slider.name == "SensY Slider") {
-            sensY = slider.value;
-        }
-    }
-
     public void StartGame() {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     } 
