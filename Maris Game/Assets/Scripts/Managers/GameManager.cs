@@ -6,9 +6,6 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-    public bool jas = false;
-    public bool mondkapje = true;
-
     public static GameManager Instance;
     public bool paused;
     public LocalManager localManager;
@@ -39,15 +36,7 @@ public class GameManager : MonoBehaviour
     }
 
     private void Update() {
-        if(Input.GetKeyDown(KeyCode.Tab)) {
-            if(mondkapje) {
-                mondkapje = false;
-                jas = true;
-            } else {
-                mondkapje = true;
-                jas = false;
-            }
-        }
+        
     }
 
     

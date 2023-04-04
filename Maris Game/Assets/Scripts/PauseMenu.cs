@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class PauseMenu : MonoBehaviour
 {
     private GameManager gameManager;
+    private InputManager inputManager;
     private GameObject pauseMenuUI;
     public static bool paused = false;
 
@@ -13,10 +14,11 @@ public class PauseMenu : MonoBehaviour
         pauseMenuUI = GameObject.Find("Pause Menu");
         pauseMenuUI.SetActive(false);
         gameManager = FindObjectOfType<GameManager>();
+        inputManager = FindObjectOfType<InputManager>();
     }
 
     private void Update() {
-        if(Input.GetKeyDown(gameManager.pauseKey)) {
+        if(Input.GetKeyDown(inputManager.pauseKey)) {
             Pause();
         }
     }

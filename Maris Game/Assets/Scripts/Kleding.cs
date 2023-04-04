@@ -6,24 +6,36 @@ public class Kleding : MonoBehaviour
 {
     public bool kapjeOp = false;
     public bool jasAan = false;
-    public GameObject mondkapje;
+    public bool jas = false;
+    public bool mondkapje = true;
     public Animator anim;
     
     private GameManager gameManager;
+    private InputManager inputManager;
+    
 
 
     private void Start() {
+        inputManager = FindObjectOfType<InputManager>();
         gameManager = FindObjectOfType<GameManager>();
-        mondkapje.SetActive(false);
-
     }
     private void Update() {
-        mondKapje();
-        jas();
+        MondKapje();
+        Jas();
+
+        if(Input.GetKeyDown(inputManager.switchClothKey)) {
+            if(mondkapje) {
+                mondkapje = false;
+                jas = true;
+            } else {
+                mondkapje = true;
+                jas = false;
+            }
+        }
     }
 
-    private void mondKapje() {
-        if(!gameManager.mondkapje) {
+    private void MondKapje() {
+        if(!mondkapje) {
             return;
         }
         if(Input.GetKeyDown(KeyCode.E)) {
@@ -38,8 +50,8 @@ public class Kleding : MonoBehaviour
         }
     }
 
-    private void jas() {
-        if(!gameManager.jas) {
+    private void Jas() {
+        if(!jas) {
             return;
         }
         if(Input.GetKeyDown(KeyCode.E)) {

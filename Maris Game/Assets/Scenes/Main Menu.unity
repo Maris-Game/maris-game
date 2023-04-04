@@ -475,8 +475,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cc805538805f4034c9a614d364280e6e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  jas: 0
-  mondkapje: 1
   paused: 0
   localManager: {fileID: 0}
   sensX: 1000
@@ -511,10 +509,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sprintKey: 304
   pauseKey: 27
+  switchClothKey: 9
+  keys: 300100001b00000009000000
   inputMenu: {fileID: 86413552}
   mainMenu: {fileID: 1959416678}
   askingInput: 0
   controlName: 
+  curText: {fileID: 0}
 --- !u!1 &475077433
 GameObject:
   m_ObjectHideFlags: 0
@@ -876,7 +877,7 @@ GameObject:
   - component: {fileID: 988675286}
   - component: {fileID: 988675285}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: Pause Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -898,7 +899,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 2.9, y: 0}
+  m_AnchoredPosition: {x: 2.65, y: 0}
   m_SizeDelta: {x: -5.8, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &988675285
@@ -921,7 +922,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Pause: Esc'
+  m_text: 'Pause: Escape
+
+'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -2106,8 +2109,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -357.64246, y: -186.15747}
-  m_SizeDelta: {x: 179.9151, y: 46.515}
+  m_AnchoredPosition: {x: -362.2, y: -140.3}
+  m_SizeDelta: {x: 217.9571, y: 46.515}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2105260447
 MonoBehaviour:
@@ -2163,6 +2166,18 @@ MonoBehaviour:
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: pause
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 444218056}
+        m_TargetAssemblyTypeName: InputManager, Assembly-CSharp
+        m_MethodName: InputGetText
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 988675285}
+          m_ObjectArgumentAssemblyTypeName: TMPro.TextMeshProUGUI, Unity.TextMeshPro
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &2105260448

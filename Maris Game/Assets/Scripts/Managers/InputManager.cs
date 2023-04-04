@@ -2,17 +2,22 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
 
 public class InputManager : MonoBehaviour
 {
     [Header("Controls")]
     public KeyCode sprintKey = KeyCode.LeftShift;
     public KeyCode pauseKey = KeyCode.Escape;
+    public KeyCode switchClothKey = KeyCode.Tab; 
+    public KeyCode[] keys;
 
     public GameObject inputMenu;
     public GameObject mainMenu;
     public bool askingInput;
     public string controlName;
+    public TextMeshProUGUI curText;
 
     private void Update() {
         if(askingInput && inputMenu != null) {
@@ -27,6 +32,7 @@ public class InputManager : MonoBehaviour
 
                         if(controlName == "pause") {
                             pauseKey = kcode;
+                            curText.text = "Pause: " + kcode.ToString();
                         } else if(controlName == "sprint") {
                             sprintKey = kcode;
                         }
@@ -42,5 +48,9 @@ public class InputManager : MonoBehaviour
         controlName = name;
         inputMenu.SetActive(true);
         mainMenu.SetActive(false);
+    }
+
+    public void InputGetText(TextMeshProUGUI text) {
+        curText = text;
     }
 }
