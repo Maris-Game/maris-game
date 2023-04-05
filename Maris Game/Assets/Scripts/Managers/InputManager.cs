@@ -38,7 +38,7 @@ public class InputManager : MonoBehaviour
                 int? curNum = isNumber(curKey);
                 
                 for(int i = 0; i < keyNames.Length; i++) {
-                    if(keyNames[i].Contains(curName)) {
+                    if(keyNames[i] == curName) {
                         keys[i] = curKey;
                     }
                 }
@@ -60,7 +60,7 @@ public class InputManager : MonoBehaviour
                 askingInput = false;
                 inputMenu.SetActive(false);
                 settingsMenu.SetActive(true);
-                Debug.Log("KeyCode down: " + kcode);
+                Debug.Log("Key clicked: " + kcode);
                 return kcode;    
             } 
         }   return KeyCode.None; 

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class LocalManager : MonoBehaviour
 {
-    private GameManager gameManager;
+    public GameManager gameManager;
 
     private void Awake() {
         gameManager = FindObjectOfType<GameManager>();

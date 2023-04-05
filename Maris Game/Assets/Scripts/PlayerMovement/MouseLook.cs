@@ -14,7 +14,7 @@ public class MouseLook : MonoBehaviour
     private void Start() {
         Cursor.lockState = CursorLockMode.Locked;
         gameManager = FindObjectOfType<GameManager>();
-        inputManager = gameManager.inputManager;
+        inputManager = FindObjectOfType<InputManager>();
     }
 
     private void Update() {

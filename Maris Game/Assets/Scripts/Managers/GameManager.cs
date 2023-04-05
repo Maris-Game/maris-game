@@ -6,23 +6,20 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-    public static GameManager Instance;
+    public static GameManager instance;
     public bool paused;
     public LocalManager localManager;
-    public InputManager inputManager { get; private set; }
-
-    [Header("Controls")]
-    public KeyCode sprintKey = KeyCode.LeftShift;
-    public KeyCode pauseKey = KeyCode.Escape;
+    public InputManager inputManager;
 
     private void Awake() {
-        if (Instance != null)
+        if (instance != null)
         {
             Destroy(gameObject);
             return;
         }
 
-        Instance = this;
+        instance = this;
+        DontDestroyOnLoad(instance);
         inputManager = GetComponent<InputManager>();
         OnSceneLoaded();
         
