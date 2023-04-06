@@ -13,8 +13,8 @@ public class PauseMenu : MonoBehaviour
     private void Awake() {
         pauseMenuUI = GameObject.Find("Pause Menu");
         pauseMenuUI.SetActive(false);
-        gameManager = FindObjectOfType<GameManager>();
-        inputManager = gameManager.inputManager;
+        gameManager = GameManager.instance;
+        inputManager = GameManager.instance.inputManager;
     }
 
     private void Update() {

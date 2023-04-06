@@ -7,14 +7,14 @@ public class MouseLook : MonoBehaviour
     public Transform playerBody;
 
     private float xRot;
-    private GameManager gameManager;
     private InputManager inputManager;
+    private GameManager gameManager;
 
 
     private void Start() {
         Cursor.lockState = CursorLockMode.Locked;
-        gameManager = FindObjectOfType<GameManager>();
-        inputManager = FindObjectOfType<InputManager>();
+        gameManager = GameManager.instance;
+        inputManager = GameManager.instance.inputManager;
     }
 
     private void Update() {

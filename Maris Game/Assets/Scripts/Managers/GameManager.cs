@@ -19,7 +19,7 @@ public class GameManager : MonoBehaviour
         }
 
         instance = this;
-        DontDestroyOnLoad(instance);
+        DontDestroyOnLoad(instance.gameObject);
         inputManager = GetComponent<InputManager>();
         OnSceneLoaded();
         

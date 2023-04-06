@@ -18,12 +18,13 @@ public class PlayerMovement : MonoBehaviour
 
     private Vector3 velocity;
     private bool grounded;
-    public GameManager gameManager;
-    public InputManager inputManager;
+    
+    private InputManager inputManager;
+    private GameManager gameManager;
 
     private void Start() {
-        gameManager = FindObjectOfType<GameManager>();
-        inputManager = FindObjectOfType<InputManager>();
+        gameManager = GameManager.instance;
+        inputManager = GameManager.instance.inputManager;
     }
 
     private void Update() {

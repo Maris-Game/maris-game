@@ -16,8 +16,8 @@ public class Kleding : MonoBehaviour
 
 
     private void Start() {
-        inputManager = FindObjectOfType<InputManager>();
-        gameManager = FindObjectOfType<GameManager>();
+        gameManager = GameManager.instance;
+        inputManager = GameManager.instance.inputManager;
     }
     private void Update() {
         MondKapje();
