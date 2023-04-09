@@ -81,5 +81,5 @@ MonoBehaviour:
   - Pause
   - SwitchClothes
   - ClothesOn
-  sensX: 1000
-  sensY: 1000
+  sensX: 100
+  sensY: 100

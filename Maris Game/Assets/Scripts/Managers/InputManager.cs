@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
-public class InputManager : MonoBehaviour
+public class InputManager : MonoBehaviour, IDataPersistence
 {
     public GameObject inputMenu;
     public GameObject settingsMenu;
@@ -24,7 +24,7 @@ public class InputManager : MonoBehaviour
     public KeyCode pauseKey = KeyCode.Escape;
     public KeyCode switchClothKey = KeyCode.Tab; 
     public KeyCode clothesOn = KeyCode.E;
-    public KeyCode[] keys;
+    public List<KeyCode> keys;
     public string[] keyNames;
 
     [Header("Other Settings")]
@@ -42,7 +42,6 @@ public class InputManager : MonoBehaviour
                         keys[i] = curKey;
                     }
                 }
-
                 UpdateKeys();
 
                 if(curNum == null) {
@@ -63,7 +62,8 @@ public class InputManager : MonoBehaviour
                 Debug.Log("Key clicked: " + kcode);
                 return kcode;    
             } 
-        }   return KeyCode.None; 
+        }   
+        return KeyCode.None; 
     }
     private int? isNumber(KeyCode key) {
         //check if the key pressed is a number
@@ -75,7 +75,8 @@ public class InputManager : MonoBehaviour
                     return 0;
                 }
             }
-        } return null;
+        } 
+        return null;
     }
 
     private void UpdateKeys() {
@@ -102,7 +103,7 @@ public class InputManager : MonoBehaviour
         }
         curText = slider.gameObject.transform.GetChild(3).GetComponent<TextMeshProUGUI>();
         curText.enabled = true;
-        curText.text = Mathf.Round(slider.value / 10).ToString();
+        curText.text = Mathf.Round(slider.value).ToString();
         StartCoroutine(dissapearText(curText, sensValueUIDelay));
     }
 
@@ -115,5 +116,17 @@ public class InputManager : MonoBehaviour
 
     public void InputGetText(TextMeshProUGUI text) {
         curText = text;
+    }
+
+    public void LoadData(GameData data) {
+        this.sensX = data.sensX;
+        this.sensY = data.sensY; 
+        this.keys = data.keys;
+    }
+
+    public void SaveData(ref GameData data) {
+        data.sensX = this.sensX;
+        data.sensY = this.sensY;
+        data.keys = this.keys;
     }
 }
