@@ -19,6 +19,7 @@ public class DataPersistenceManager : MonoBehaviour
             Destroy(this.gameObject);
         }
         instance = this;
+        DontDestroyOnLoad(this.gameObject);
     }
 
     private void Start() {
@@ -31,9 +32,10 @@ public class DataPersistenceManager : MonoBehaviour
     public void NewGame() {
         this.gameData = new GameData();
 
-        for(int i = 0; i < 8; i++) {
+        for(int i = 0; i < GameManager.instance.inputManager.keys.Count; i++) {
             gameData.keys.Add(KeyCode.None);
         }
+        gameData.keys = GameManager.instance.inputManager.keys;
         Debug.Log(gameData.keys);
     }
 

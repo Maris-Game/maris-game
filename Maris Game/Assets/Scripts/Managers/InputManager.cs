@@ -31,6 +31,10 @@ public class InputManager : MonoBehaviour, IDataPersistence
     public float sensX;
     public float sensY;
 
+    private void Start() {
+        UpdateKeys();
+    }
+
     private void Update() {
         if(askingInput && inputMenu != null) {
             if(Input.anyKeyDown) {
