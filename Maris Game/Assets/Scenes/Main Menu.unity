@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.37311953, g: 0.38074014, b: 0.3587274, a: 1}
+  m_IndirectSpecularColor: {r: 0.3731193, g: 0.38073996, b: 0.35872698, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -246,6 +246,7 @@ GameObject:
   - component: {fileID: 331819242}
   - component: {fileID: 331819244}
   - component: {fileID: 331819243}
+  - component: {fileID: 331819245}
   m_Layer: 5
   m_Name: Sens Y
   m_TagString: Untagged
@@ -370,6 +371,23 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 331819241}
   m_CullTransparentMesh: 1
+--- !u!114 &331819245
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 331819241}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6f655849f3b215348896c6c769353c3a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  keyNumberInManager: 0
+  settingSort: slider
+  preText: 
+  text: {fileID: 0}
+  slider: {fileID: 1428675734}
 --- !u!1 &349955553
 GameObject:
   m_ObjectHideFlags: 0
@@ -382,6 +400,7 @@ GameObject:
   - component: {fileID: 349955557}
   - component: {fileID: 349955556}
   - component: {fileID: 349955555}
+  - component: {fileID: 349955558}
   m_Layer: 5
   m_Name: Left key button
   m_TagString: Untagged
@@ -515,6 +534,23 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 349955553}
   m_CullTransparentMesh: 1
+--- !u!114 &349955558
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 349955553}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6f655849f3b215348896c6c769353c3a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  keyNumberInManager: 2
+  settingSort: key
+  preText: Left
+  text: {fileID: 1374484322}
+  slider: {fileID: 0}
 --- !u!1 &359024181
 GameObject:
   m_ObjectHideFlags: 0
@@ -602,6 +638,7 @@ GameObject:
   - component: {fileID: 428352830}
   - component: {fileID: 428352829}
   - component: {fileID: 428352828}
+  - component: {fileID: 428352831}
   m_Layer: 5
   m_Name: Right key button
   m_TagString: Untagged
@@ -735,6 +772,23 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 428352826}
   m_CullTransparentMesh: 1
+--- !u!114 &428352831
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 428352826}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6f655849f3b215348896c6c769353c3a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  keyNumberInManager: 3
+  settingSort: key
+  preText: Right
+  text: {fileID: 1964681306}
+  slider: {fileID: 0}
 --- !u!1 &436190175
 GameObject:
   m_ObjectHideFlags: 0
@@ -1325,6 +1379,7 @@ GameObject:
   - component: {fileID: 889478889}
   - component: {fileID: 889478888}
   - component: {fileID: 889478887}
+  - component: {fileID: 889478890}
   m_Layer: 5
   m_Name: Clothes On key button
   m_TagString: Untagged
@@ -1458,6 +1513,23 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 889478885}
   m_CullTransparentMesh: 1
+--- !u!114 &889478890
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 889478885}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6f655849f3b215348896c6c769353c3a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  keyNumberInManager: 7
+  settingSort: key
+  preText: Clothes On
+  text: {fileID: 753290057}
+  slider: {fileID: 0}
 --- !u!1 &947888494
 GameObject:
   m_ObjectHideFlags: 0
@@ -1470,7 +1542,7 @@ GameObject:
   - component: {fileID: 947888497}
   - component: {fileID: 947888496}
   m_Layer: 5
-  m_Name: Pause Text
+  m_Name: Sprint Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1950,37 +2022,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1124747955}
   m_CullTransparentMesh: 1
---- !u!1 &1135336807
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1135336808}
-  m_Layer: 0
-  m_Name: Managers
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1135336808
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1135336807}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 377.86813, y: 192.34814, z: -38.069145}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 2040966320}
-  m_Father: {fileID: 0}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1257521268
 GameObject:
   m_ObjectHideFlags: 0
@@ -2116,6 +2157,7 @@ GameObject:
   - component: {fileID: 1346347502}
   - component: {fileID: 1346347501}
   - component: {fileID: 1346347500}
+  - component: {fileID: 1346347503}
   m_Layer: 5
   m_Name: Switch Clothes key  button
   m_TagString: Untagged
@@ -2249,6 +2291,23 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1346347498}
   m_CullTransparentMesh: 1
+--- !u!114 &1346347503
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1346347498}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6f655849f3b215348896c6c769353c3a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  keyNumberInManager: 6
+  settingSort: key
+  preText: Switch Clothes
+  text: {fileID: 1350132578}
+  slider: {fileID: 0}
 --- !u!1 &1350132576
 GameObject:
   m_ObjectHideFlags: 0
@@ -3038,6 +3097,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6f655849f3b215348896c6c769353c3a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  keyNumberInManager: 0
+  settingSort: slider
+  preText: 
+  text: {fileID: 0}
+  slider: {fileID: 714277972}
 --- !u!1 &1541172608
 GameObject:
   m_ObjectHideFlags: 0
@@ -3548,6 +3612,7 @@ GameObject:
   - component: {fileID: 1731413081}
   - component: {fileID: 1731413080}
   - component: {fileID: 1731413079}
+  - component: {fileID: 1731413082}
   m_Layer: 5
   m_Name: Backward key button
   m_TagString: Untagged
@@ -3681,6 +3746,23 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1731413077}
   m_CullTransparentMesh: 1
+--- !u!114 &1731413082
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1731413077}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6f655849f3b215348896c6c769353c3a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  keyNumberInManager: 1
+  settingSort: key
+  preText: Backward
+  text: {fileID: 1974622638}
+  slider: {fileID: 0}
 --- !u!1 &1777975194
 GameObject:
   m_ObjectHideFlags: 0
@@ -3808,6 +3890,7 @@ GameObject:
   - component: {fileID: 1797179834}
   - component: {fileID: 1797179833}
   - component: {fileID: 1797179832}
+  - component: {fileID: 1797179835}
   m_Layer: 5
   m_Name: Pause Key Button
   m_TagString: Untagged
@@ -3941,6 +4024,23 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1797179830}
   m_CullTransparentMesh: 1
+--- !u!114 &1797179835
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1797179830}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6f655849f3b215348896c6c769353c3a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  keyNumberInManager: 5
+  settingSort: key
+  preText: Pause
+  text: {fileID: 1487050969}
+  slider: {fileID: 0}
 --- !u!1 &1866899409
 GameObject:
   m_ObjectHideFlags: 0
@@ -4852,11 +4952,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2024688316}
   m_CullTransparentMesh: 1
---- !u!4 &2040966320 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 2414105340757899722, guid: f0303107a73ff0441b0f4e7b435c8536, type: 3}
-  m_PrefabInstance: {fileID: 2414105340590506765}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2042975428
 GameObject:
   m_ObjectHideFlags: 0
@@ -4944,6 +5039,7 @@ GameObject:
   - component: {fileID: 2070898947}
   - component: {fileID: 2070898946}
   - component: {fileID: 2070898945}
+  - component: {fileID: 2070898948}
   m_Layer: 5
   m_Name: Sprint key button
   m_TagString: Untagged
@@ -5077,6 +5173,23 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2070898943}
   m_CullTransparentMesh: 1
+--- !u!114 &2070898948
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2070898943}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6f655849f3b215348896c6c769353c3a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  keyNumberInManager: 4
+  settingSort: key
+  preText: Sprint
+  text: {fileID: 947888496}
+  slider: {fileID: 0}
 --- !u!1 &2105260445
 GameObject:
   m_ObjectHideFlags: 0
@@ -5089,6 +5202,7 @@ GameObject:
   - component: {fileID: 2105260449}
   - component: {fileID: 2105260448}
   - component: {fileID: 2105260447}
+  - component: {fileID: 2105260450}
   m_Layer: 5
   m_Name: Forward key button
   m_TagString: Untagged
@@ -5222,6 +5336,23 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2105260445}
   m_CullTransparentMesh: 1
+--- !u!114 &2105260450
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2105260445}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6f655849f3b215348896c6c769353c3a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  keyNumberInManager: 0
+  settingSort: key
+  preText: Forward
+  text: {fileID: 988675285}
+  slider: {fileID: 0}
 --- !u!1 &2110318320
 GameObject:
   m_ObjectHideFlags: 0
@@ -5494,7 +5625,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    m_TransformParent: {fileID: 1135336808}
+    m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 2414105340757899717, guid: f0303107a73ff0441b0f4e7b435c8536, type: 3}
       propertyPath: inputMenu
@@ -5514,15 +5645,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2414105340757899722, guid: f0303107a73ff0441b0f4e7b435c8536, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -261.47223
+      value: 116.395905
       objectReference: {fileID: 0}
     - target: {fileID: 2414105340757899722, guid: f0303107a73ff0441b0f4e7b435c8536, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -44.15599
+      value: 148.19215
       objectReference: {fileID: 0}
     - target: {fileID: 2414105340757899722, guid: f0303107a73ff0441b0f4e7b435c8536, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 65.55002
+      value: 27.480873
       objectReference: {fileID: 0}
     - target: {fileID: 2414105340757899722, guid: f0303107a73ff0441b0f4e7b435c8536, type: 3}
       propertyPath: m_LocalRotation.w

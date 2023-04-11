@@ -8,9 +8,9 @@ using UnityEngine.UI;
 public class Enable : MonoBehaviour
 {
     private InputManager inputManager;
-    public string stringName;
+    public int keyNumberInManager;
     public string settingSort;
-    public string previewText;
+    public string preText;
 
     public TextMeshProUGUI text;
     public Slider slider;
@@ -21,10 +21,14 @@ public class Enable : MonoBehaviour
     }
 
     public void OnEnable() {
-        if(settingSort == "text") {
-            text.text = inputManager.nameOf(stringName).ToString();
+        if(settingSort == "key") {
+            text.text = preText + ": " + inputManager.keys[keyNumberInManager].ToString();
         } else if(settingSort == "slider") {
-            
+            if(slider.gameObject.name.Contains("SensX")) {
+                slider.value = inputManager.sensX;
+            } else if (slider.gameObject.name.Contains("SensY")) {
+                slider.value = inputManager.sensY;
+            }
         }
         
     }  
