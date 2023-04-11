@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657874, g: 0.49641275, b: 0.5748171, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -358,14 +358,14 @@ MonoBehaviour:
   m_HandleRect: {fileID: 1653626017}
   m_Direction: 0
   m_MinValue: 1
-  m_MaxValue: 2000
+  m_MaxValue: 200
   m_WholeNumbers: 0
-  m_Value: 1000
+  m_Value: 100
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: InputManager, Assembly-CSharp
+      - m_Target: {fileID: 1644004032}
+        m_TargetAssemblyTypeName: PauseMenu, Assembly-CSharp
         m_MethodName: ChangeSens
         m_Mode: 2
         m_Arguments:
@@ -598,14 +598,14 @@ MonoBehaviour:
   m_HandleRect: {fileID: 1734817517}
   m_Direction: 0
   m_MinValue: 1
-  m_MaxValue: 2000
+  m_MaxValue: 200
   m_WholeNumbers: 0
-  m_Value: 1000
+  m_Value: 100
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: InputManager, Assembly-CSharp
+      - m_Target: {fileID: 1644004032}
+        m_TargetAssemblyTypeName: PauseMenu, Assembly-CSharp
         m_MethodName: ChangeSens
         m_Mode: 2
         m_Arguments:
@@ -722,6 +722,7 @@ GameObject:
   - component: {fileID: 596294142}
   - component: {fileID: 596294144}
   - component: {fileID: 596294143}
+  - component: {fileID: 596294145}
   m_Layer: 5
   m_Name: Sens X
   m_TagString: Untagged
@@ -738,7 +739,7 @@ RectTransform:
   m_GameObject: {fileID: 596294141}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.74063, y: 0.74063, z: 0.74063}
+  m_LocalScale: {x: 1.48126, y: 1.48126, z: 0.74063}
   m_Children:
   - {fileID: 443403625}
   m_Father: {fileID: 1588334093}
@@ -846,6 +847,23 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 596294141}
   m_CullTransparentMesh: 1
+--- !u!114 &596294145
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 596294141}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6f655849f3b215348896c6c769353c3a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  keyNumberInManager: 0
+  settingSort: slider
+  preText: 
+  text: {fileID: 0}
+  slider: {fileID: 443403626}
 --- !u!1 &601200108
 GameObject:
   m_ObjectHideFlags: 0
@@ -1938,7 +1956,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 996, y: 560}
+  m_SizeDelta: {x: 1920, y: 1080}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1588334094
 MonoBehaviour:
@@ -2038,7 +2056,7 @@ RectTransform:
   m_GameObject: {fileID: 1619806524}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 2, y: 2, z: 1}
   m_Children: []
   m_Father: {fileID: 1588334093}
   m_RootOrder: 0
@@ -2196,10 +2214,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 800, y: 600}
+  m_ReferenceResolution: {x: 1920, y: 1080}
   m_ScreenMatchMode: 0
   m_MatchWidthOrHeight: 0
   m_PhysicalUnit: 3
@@ -2667,6 +2685,7 @@ GameObject:
   - component: {fileID: 1992297600}
   - component: {fileID: 1992297602}
   - component: {fileID: 1992297601}
+  - component: {fileID: 1992297603}
   m_Layer: 5
   m_Name: Sens Y
   m_TagString: Untagged
@@ -2683,7 +2702,7 @@ RectTransform:
   m_GameObject: {fileID: 1992297599}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.74063, y: 0.74063, z: 0.74063}
+  m_LocalScale: {x: 1.48126, y: 1.48126, z: 0.74063}
   m_Children:
   - {fileID: 514621547}
   m_Father: {fileID: 1588334093}
@@ -2791,6 +2810,23 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1992297599}
   m_CullTransparentMesh: 1
+--- !u!114 &1992297603
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1992297599}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6f655849f3b215348896c6c769353c3a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  keyNumberInManager: 0
+  settingSort: slider
+  preText: 
+  text: {fileID: 0}
+  slider: {fileID: 514621548}
 --- !u!1 &1994247220
 GameObject:
   m_ObjectHideFlags: 0

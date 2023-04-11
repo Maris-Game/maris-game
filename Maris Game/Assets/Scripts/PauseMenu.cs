@@ -39,6 +39,6 @@ public class PauseMenu : MonoBehaviour
     }
 
     public void ChangeSens(Slider slider) {
-        inputManager.ChangeSens(slider);
+        GameManager.instance.inputManager.ChangeSens(slider);
     }
 }
