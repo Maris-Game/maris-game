@@ -9,8 +9,10 @@ public class Enable : MonoBehaviour
 {
     private InputManager inputManager;
     public int keyNumberInManager;
-    public string settingSort;
+    public string[] settingSort = new string[] { "Key", "Slider"};
+    public int arrayIndex = 0;
     public string preText;
+    
 
     public TextMeshProUGUI text;
     public Slider slider;
@@ -21,9 +23,11 @@ public class Enable : MonoBehaviour
     }
 
     public void OnEnable() {
-        if(settingSort == "key") {
+        if(settingSort[arrayIndex] == "Key") {
+            
             text.text = preText + ": " + inputManager.keys[keyNumberInManager].ToString();
-        } else if(settingSort == "slider") {
+        } else if(settingSort[arrayIndex] == "Slider") {
+            
             if(slider.gameObject.name.Contains("SensX")) {
                 slider.value = inputManager.sensX;
             } else if (slider.gameObject.name.Contains("SensY")) {

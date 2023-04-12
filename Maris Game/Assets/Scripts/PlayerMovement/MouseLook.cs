@@ -5,7 +5,7 @@ using UnityEngine;
 public class MouseLook : MonoBehaviour
 {
     public Transform playerBody;
-
+    public bool onPC;
     private float xRot;
     private InputManager inputManager;
     private GameManager gameManager;
@@ -20,6 +20,11 @@ public class MouseLook : MonoBehaviour
     private void Update() {
         float mouseX = Input.GetAxis("Mouse X") * inputManager.sensX * Time.deltaTime;
         float mouseY = Input.GetAxis("Mouse Y") * inputManager.sensY * Time.deltaTime;
+
+        if(onPC) {
+            mouseX *= 10;
+            mouseY *= 10;
+        }
 
         xRot -= mouseY;
         xRot = Mathf.Clamp(xRot, -90f, 90f);

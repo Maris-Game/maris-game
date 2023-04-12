@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Kleding : MonoBehaviour
 {
-    public bool kapjeOp = false;
+    public bool mondkapjeOp = false;
     public bool jasAan = false;
     public bool jas = false;
     public bool mondkapje = true;
@@ -39,12 +39,12 @@ public class Kleding : MonoBehaviour
             return;
         }
         if(Input.GetKeyDown(KeyCode.E)) {
-            if(!kapjeOp) {
-                kapjeOp = true;
+            if(!mondkapjeOp) {
+                mondkapjeOp = true;
                 anim.Play("mondkapjeOp", 1);
             }
             else { 
-                kapjeOp = false;
+                mondkapjeOp = false;
                 anim.Play("mondkapjeAf", 1);
             }
         }
