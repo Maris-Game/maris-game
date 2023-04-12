@@ -107,7 +107,7 @@ public class InputManager : MonoBehaviour, IDataPersistence
         }
         curText = slider.gameObject.transform.GetChild(3).GetComponent<TextMeshProUGUI>();
         curText.enabled = true;
-        curText.text = Mathf.Round(slider.value * 10).ToString();
+        curText.text = Mathf.Round(slider.value).ToString();
         StartCoroutine(dissapearText(curText, sensValueUIDelay));
     }
 
@@ -118,7 +118,7 @@ public class InputManager : MonoBehaviour, IDataPersistence
         settingsMenu.SetActive(false);
     }
 
-    public void InputGetText(TextMeshProUGUI text) {
+    public void GetText(TextMeshProUGUI text) {
         curText = text;
     }
 

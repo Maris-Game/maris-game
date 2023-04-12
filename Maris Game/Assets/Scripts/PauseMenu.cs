@@ -2,12 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class PauseMenu : MonoBehaviour
 {
     private GameManager gameManager;
     private InputManager inputManager;
     private GameObject pauseMenuUI;
+    private TextMeshProUGUI curText;
     public static bool paused = false;
 
     private void Awake() {
@@ -40,5 +42,10 @@ public class PauseMenu : MonoBehaviour
 
     public void ChangeSens(Slider slider) {
         GameManager.instance.inputManager.ChangeSens(slider);
+        inputManager.GetText(curText);
+    }
+
+    public void GetText(TextMeshProUGUI text) {
+        curText = text;
     }
 }

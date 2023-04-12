@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.3731193, g: 0.38073996, b: 0.35872698, a: 1}
+  m_IndirectSpecularColor: {r: 0.37311953, g: 0.38074014, b: 0.3587274, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -486,7 +486,7 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 444218056}
         m_TargetAssemblyTypeName: InputManager, Assembly-CSharp
-        m_MethodName: InputGetText
+        m_MethodName: GetText
         m_Mode: 2
         m_Arguments:
           m_ObjectArgument: {fileID: 1374484322}
@@ -724,7 +724,7 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 444218056}
         m_TargetAssemblyTypeName: InputManager, Assembly-CSharp
-        m_MethodName: InputGetText
+        m_MethodName: GetText
         m_Mode: 2
         m_Arguments:
           m_ObjectArgument: {fileID: 1964681306}
@@ -1231,6 +1231,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 444218056}
+        m_TargetAssemblyTypeName: InputManager, Assembly-CSharp
+        m_MethodName: GetText
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 2110318322}
+          m_ObjectArgumentAssemblyTypeName: TMPro.TextMeshProUGUI, Unity.TextMeshPro
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &753290055
 GameObject:
   m_ObjectHideFlags: 0
@@ -1465,7 +1477,7 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 444218056}
         m_TargetAssemblyTypeName: InputManager, Assembly-CSharp
-        m_MethodName: InputGetText
+        m_MethodName: GetText
         m_Mode: 2
         m_Arguments:
           m_ObjectArgument: {fileID: 753290057}
@@ -2243,7 +2255,7 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 444218056}
         m_TargetAssemblyTypeName: InputManager, Assembly-CSharp
-        m_MethodName: InputGetText
+        m_MethodName: GetText
         m_Mode: 2
         m_Arguments:
           m_ObjectArgument: {fileID: 1350132578}
@@ -2810,6 +2822,18 @@ MonoBehaviour:
         m_Arguments:
           m_ObjectArgument: {fileID: 1428675734}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.UI.Slider, UnityEngine.UI
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 444218056}
+        m_TargetAssemblyTypeName: InputManager, Assembly-CSharp
+        m_MethodName: GetText
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 1940962110}
+          m_ObjectArgumentAssemblyTypeName: TMPro.TextMeshProUGUI, Unity.TextMeshPro
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -3698,7 +3722,7 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 444218056}
         m_TargetAssemblyTypeName: InputManager, Assembly-CSharp
-        m_MethodName: InputGetText
+        m_MethodName: GetText
         m_Mode: 2
         m_Arguments:
           m_ObjectArgument: {fileID: 1974622638}
@@ -3976,7 +4000,7 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 444218056}
         m_TargetAssemblyTypeName: InputManager, Assembly-CSharp
-        m_MethodName: InputGetText
+        m_MethodName: GetText
         m_Mode: 2
         m_Arguments:
           m_ObjectArgument: {fileID: 1487050969}
@@ -4253,7 +4277,7 @@ GameObject:
   - component: {fileID: 1940962111}
   - component: {fileID: 1940962110}
   m_Layer: 5
-  m_Name: ValueText
+  m_Name: ValueTextY
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5125,7 +5149,7 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 444218056}
         m_TargetAssemblyTypeName: InputManager, Assembly-CSharp
-        m_MethodName: InputGetText
+        m_MethodName: GetText
         m_Mode: 2
         m_Arguments:
           m_ObjectArgument: {fileID: 947888496}
@@ -5288,7 +5312,7 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 444218056}
         m_TargetAssemblyTypeName: InputManager, Assembly-CSharp
-        m_MethodName: InputGetText
+        m_MethodName: GetText
         m_Mode: 2
         m_Arguments:
           m_ObjectArgument: {fileID: 988675285}
@@ -5365,7 +5389,7 @@ GameObject:
   - component: {fileID: 2110318323}
   - component: {fileID: 2110318322}
   m_Layer: 5
-  m_Name: ValueText
+  m_Name: ValueTextX
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
