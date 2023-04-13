@@ -14,6 +14,10 @@ public class AIController : MonoBehaviour
     private SphereCollider sc;
 
     public bool chase;
+    public float yOffset; 
+    public Vector3 rayStartPos;
+    public Vector3 rayDirection;
+    public float fov;
 
     //patrol
     [Header("Patrol")]
@@ -22,9 +26,12 @@ public class AIController : MonoBehaviour
     public bool destPointSet;
     public float walkRange;
 
+    [Header("Smooth Turning")]
+    public float turnSpeed = 1f;
+    private Coroutine lookCoroutine;
+
+
     [Header("Hearing")]
-    public float hearRange;
-    public LayerMask playerLayer;
     public bool hearingPlayer = false;
 
 
@@ -36,36 +43,56 @@ public class AIController : MonoBehaviour
     }
 
     private void Update() {
+
         
+        rayStartPos = new Vector3(transform.position.x, transform.position.y + yOffset, transform.position.z);
+        rayDirection = player.transform.position - this.transform.position;
 
-
-        RaycastHit hitInfo; 
-        if (Physics.Raycast(transform.position, transform.forward, out hitInfo, visionDistance)) {
-            if(hitInfo.collider.tag == "Player") {
-                
-                if(!kledingScript.mondkapjeOp && chase || kledingScript.jasAan && chase) {
+        RaycastHit hitInfo;
+         
+        if(Vector3.Angle(rayDirection, transform.forward) < fov) {
+            if(Physics.Raycast (transform.position, rayDirection, out hitInfo, visionDistance)) {
+                if(hitInfo.transform.tag == "Player") {
+                    if(!kledingScript.mondkapjeOp && chase || kledingScript.jasAan && chase) {
                     Chase();
-                    RotateToPlayer();
+                    }
+                    InvokeRepeating("RotateToPlayer", 0f, 1f * turnSpeed);
+                    Debug.DrawLine(rayStartPos, hitInfo.transform.position, Color.red);
                 }
-                Debug.DrawLine(transform.position, hitInfo.transform.position, Color.red);
-            }
+            } 
         } else {
-            if(doPatrol) {
+                if(doPatrol) {
                 Patrol();
+                }
+                Debug.DrawLine(rayStartPos, transform.position + transform.forward * visionDistance, Color.green);
             }
-            Debug.DrawLine(transform.position, transform.position + transform.forward * visionDistance, Color.green);
-        }
-
-        if(hearingPlayer) {
-            RotateToPlayer();
-        }
-        
     }
 
-    private void RotateToPlayer() {
+    public void RotateToPlayer() {
+        
+
+        if(lookCoroutine != null) {
+            StopCoroutine(lookCoroutine);
+        }
+
+        lookCoroutine = StartCoroutine(LookAt());
+    }
+
+    private IEnumerator LookAt() {
         Vector3 target = player.transform.position;
         target.y = 0;
-        transform.LookAt(target, Vector3.up);
+        Quaternion lookRotation = Quaternion.LookRotation(target - this.transform.position);
+        
+
+        float time = 0;
+
+        while (time < 1) {
+            transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, time);
+
+            time += Time.deltaTime * turnSpeed;
+
+            yield return null;
+        }
     }
 
     private void Chase() {
@@ -83,10 +110,14 @@ public class AIController : MonoBehaviour
             float x = Random.Range(-walkRange, walkRange);
 
             destPoint = new Vector3(transform.position.x + x, transform.position.y, transform.position.z + z);
-            destPointSet = true;
+            
+            if(Physics.Raycast(destPoint, Vector3.down, 6)) {
+                destPointSet = true;
+            }
+
         } else { 
             agent.SetDestination(destPoint); 
-            if(Vector3.Distance(transform.position, destPoint) < 10) { destPointSet = false; }
+            if(Vector3.Distance(transform.position, destPoint) < 20f) { destPointSet = false; }
         }
     }
     
