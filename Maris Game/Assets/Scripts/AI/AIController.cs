@@ -11,6 +11,7 @@ public class AIController : MonoBehaviour
     private GameObject player;
     private Kleding kledingScript;
     private NavMeshAgent agent;
+    private SphereCollider sc;
 
     public bool chase;
 
@@ -28,6 +29,7 @@ public class AIController : MonoBehaviour
 
 
     private void Start() {
+        sc = GetComponent<SphereCollider>();
         agent = GetComponent<NavMeshAgent>();
         player = GameObject.Find("Player");
         kledingScript = player.GetComponent<Kleding>();
@@ -35,13 +37,6 @@ public class AIController : MonoBehaviour
 
     private void Update() {
         
-        hearingPlayer = Physics.CheckSphere(transform.position, hearRange, 7);
-        Debug.Log("Hearing Object = " + hearingPlayer);
-        if(hearingPlayer) {
-            Vector3 target = player.transform.position;
-            target.y = 0;
-            transform.LookAt(target, Vector3.up);
-        }
 
 
         RaycastHit hitInfo; 
@@ -50,6 +45,7 @@ public class AIController : MonoBehaviour
                 
                 if(!kledingScript.mondkapjeOp && chase || kledingScript.jasAan && chase) {
                     Chase();
+                    RotateToPlayer();
                 }
                 Debug.DrawLine(transform.position, hitInfo.transform.position, Color.red);
             }
@@ -60,7 +56,16 @@ public class AIController : MonoBehaviour
             Debug.DrawLine(transform.position, transform.position + transform.forward * visionDistance, Color.green);
         }
 
+        if(hearingPlayer) {
+            RotateToPlayer();
+        }
         
+    }
+
+    private void RotateToPlayer() {
+        Vector3 target = player.transform.position;
+        target.y = 0;
+        transform.LookAt(target, Vector3.up);
     }
 
     private void Chase() {
@@ -84,4 +89,5 @@ public class AIController : MonoBehaviour
             if(Vector3.Distance(transform.position, destPoint) < 10) { destPointSet = false; }
         }
     }
+    
 }
