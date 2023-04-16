@@ -9,9 +9,11 @@ public class DropDownEditor : Editor
     public override void OnInspectorGUI() {
         base.OnInspectorGUI();
 
-        Enable script = (Enable)target;
+        Enable enable = (Enable)target;
 
-        GUIContent arrayLabel = new GUIContent("Setting Sort");
-        script.arrayIndex = EditorGUILayout.Popup(arrayLabel, script.arrayIndex, script.settingSort);
+        GUIContent arrayLabelEnable = new GUIContent("Setting Sort");
+        enable.arrayIndex = EditorGUILayout.Popup(arrayLabelEnable, enable.arrayIndex, enable.settingSort);
+
+        
     }
 }

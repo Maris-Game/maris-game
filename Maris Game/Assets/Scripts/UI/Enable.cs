@@ -7,7 +7,7 @@ using UnityEngine.UI;
 
 public class Enable : MonoBehaviour
 {
-    private InputManager inputManager;
+    public InputManager inputManager;
     public int keyNumberInManager;
     public string[] settingSort = new string[] { "Key", "Slider"};
     public int arrayIndex = 0;
@@ -16,9 +16,8 @@ public class Enable : MonoBehaviour
 
     public TextMeshProUGUI text;
     public Slider slider;
-    
 
-    private void Awake() {
+    private void Start() {
         inputManager = GameManager.instance.inputManager;
     }
 
@@ -26,8 +25,7 @@ public class Enable : MonoBehaviour
         if(settingSort[arrayIndex] == "Key") {
             
             text.text = preText + ": " + inputManager.keys[keyNumberInManager].ToString();
-        } else if(settingSort[arrayIndex] == "Slider") {
-            
+        } else if(settingSort[arrayIndex] == "Slider") { 
             if(slider.gameObject.name.Contains("SensX")) {
                 slider.value = inputManager.sensX;
             } else if (slider.gameObject.name.Contains("SensY")) {

@@ -10,6 +10,7 @@ public class HearingPlayer : MonoBehaviour
         aiController = this.transform.parent.GetComponent<AIController>();
     }
 
+    //if the player enters the sphere collider (AKA hearing range) rotate the AI towards the player
     private void OnTriggerEnter(Collider other) {
         Debug.Log("Collided with something");
         if(other.gameObject.tag == "Player") {

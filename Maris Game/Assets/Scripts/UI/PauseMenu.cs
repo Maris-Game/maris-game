@@ -42,7 +42,7 @@ public class PauseMenu : MonoBehaviour
 
     public void ChangeSens(Slider slider) {
         GameManager.instance.inputManager.ChangeSens(slider);
-        inputManager.GetText(curText);
+        GameManager.instance.inputManager.GetText(curText);
     }
 
     public void GetText(TextMeshProUGUI text) {

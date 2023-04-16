@@ -29,6 +29,7 @@ public class AIController : MonoBehaviour
     [Header("Smooth Turning")]
     public float turnSpeed = 1f;
     private Coroutine lookCoroutine;
+    private float curTurnTime = 0;
 
 
     [Header("Hearing")]
@@ -43,22 +44,28 @@ public class AIController : MonoBehaviour
     }
 
     private void Update() {
-
+        if(hearingPlayer) {
+            RotateToPlayer();
+        }
         
         rayStartPos = new Vector3(transform.position.x, transform.position.y + yOffset, transform.position.z);
         rayDirection = player.transform.position - this.transform.position;
 
         RaycastHit hitInfo;
-         
-        if(Vector3.Angle(rayDirection, transform.forward) < fov) {
+        
+        //if the player is in the fov of the AI turn towards the player
+        if(Vector3.Angle(rayDirection, transform.forward) < fov / 2) {
             if(Physics.Raycast (transform.position, rayDirection, out hitInfo, visionDistance)) {
                 if(hitInfo.transform.tag == "Player") {
+                    //if the player doesnt have their face mask on or have their jacket on, chase the playe   
                     if(!kledingScript.mondkapjeOp && chase || kledingScript.jasAan && chase) {
                     Chase();
                     }
-                    InvokeRepeating("RotateToPlayer", 0f, 1f * turnSpeed);
                     Debug.DrawLine(rayStartPos, hitInfo.transform.position, Color.red);
+                } else {
+                    Debug.DrawLine(rayStartPos, hitInfo.transform.position, Color.yellow);
                 }
+                RotateToPlayer();
             } 
         } else {
                 if(doPatrol) {
@@ -69,30 +76,21 @@ public class AIController : MonoBehaviour
     }
 
     public void RotateToPlayer() {
-        
 
-        if(lookCoroutine != null) {
-            StopCoroutine(lookCoroutine);
-        }
-
-        lookCoroutine = StartCoroutine(LookAt());
-    }
-
-    private IEnumerator LookAt() {
+        //makes the variable target to the player position and sets the y cordinate to 0
         Vector3 target = player.transform.position;
         target.y = 0;
         Quaternion lookRotation = Quaternion.LookRotation(target - this.transform.position);
-        
 
-        float time = 0;
+        //if time < 1 then turn smoothly towards the target
+        if(curTurnTime < 1) {
+            transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, curTurnTime);
 
-        while (time < 1) {
-            transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, time);
-
-            time += Time.deltaTime * turnSpeed;
-
-            yield return null;
+            curTurnTime += Time.deltaTime * turnSpeed;
+        } else {
+            curTurnTime = 0;
         }
+
     }
 
     private void Chase() {
@@ -104,7 +102,7 @@ public class AIController : MonoBehaviour
         if(!doPatrol) {
             return;
         }
-
+        //sets a random point to walk towards (to be changed in the future to set points, when the map is implemented)
         if(!destPointSet) {
             float z = Random.Range(-walkRange, walkRange);
             float x = Random.Range(-walkRange, walkRange);
