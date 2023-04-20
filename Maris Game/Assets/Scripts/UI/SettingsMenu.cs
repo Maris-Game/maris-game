@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -10,6 +11,12 @@ public class SettingsMenu : MonoBehaviour
     private InputManager inputManager;
     public Resolution[] resolutions;
 
+    public bool askingInput = false;
+    public float sensValueUIDelay = 2f;
+    public string curName;
+
+    
+
     
 
     [Header("Other Settings")]
@@ -20,11 +27,12 @@ public class SettingsMenu : MonoBehaviour
     [Header("UI objects")]
     public TMP_Dropdown resolutionDropdown;
     public GameObject inputMenu;
+    public GameObject askInputMenu;
     public TextMeshProUGUI curText;
 
     private void Start() {
         inputManager = GameManager.instance.inputManager;
-        inputMenu = FindGameObject<inputMenu>();l
+        askInputMenu = GameObject.Find("inputMenu");
         
         //resolutions stuff
         resolutions = Screen.resolutions;
@@ -48,11 +56,12 @@ public class SettingsMenu : MonoBehaviour
         //checks if the scene is Main Menu, if not. The settings menu will be a pause menu
         if(SceneManager.GetActiveScene().name != "MainMenu") {
             pauseMenu = true;
+            inputMenu = GameObject.Find("Input Settings");
         }
     }
 
     private void Update() {
-        if(inputManager.askingInput && inputMenu != null) {
+        if(askingInput && inputMenu != null) {
             if(Input.anyKeyDown) {
                 KeyCode curKey = checkKey();
                 int? curNum = isNumber(curKey);
@@ -78,8 +87,8 @@ public class SettingsMenu : MonoBehaviour
         {
             if (Input.GetKey(kcode)) {
                 askingInput = false;
-                inputMenu.SetActive(false);
-                settingsMenu.SetActive(true);
+                askInputMenu.SetActive(false);
+                inputMenu.SetActive(true);
                 Debug.Log("Key clicked: " + kcode);
                 return kcode;    
             } 
@@ -108,9 +117,9 @@ public class SettingsMenu : MonoBehaviour
 
     public void ChangeSens(Slider slider) {
         if(slider.name =="SensX Slider") {
-            sensX = inputManager.slider.value;
+            inputManager.sensX = slider.value;
         } else if(slider.name == "SensY Slider") {
-            sensY = inputManagerslider.value;
+            inputManager.sensY = slider.value;
         }
         curText = slider.gameObject.transform.GetChild(3).GetComponent<TextMeshProUGUI>();
         curText.enabled = true;
@@ -120,5 +129,17 @@ public class SettingsMenu : MonoBehaviour
 
     public void GetText(TextMeshProUGUI text) {
         curText = text;
+    }
+
+    public void askInput(string name) {
+        askingInput = true;
+        curName = name;
+        askInputMenu.SetActive(true);
+        inputMenu.SetActive(false);
+    }
+
+    IEnumerator dissapearText(TextMeshProUGUI curDissapearText, float delay) {
+        yield return new WaitForSeconds(delay);
+        curDissapearText.enabled = false;
     }
 }

@@ -8,6 +8,7 @@ public class PauseMenu : MonoBehaviour
 {
     private GameManager gameManager;
     private InputManager inputManager;
+    private SettingsMenu settingsMenu;
     private GameObject pauseMenuUI;
     private TextMeshProUGUI curText;
     public static bool paused = false;
@@ -17,6 +18,7 @@ public class PauseMenu : MonoBehaviour
         pauseMenuUI.SetActive(false);
         gameManager = GameManager.instance;
         inputManager = GameManager.instance.inputManager;
+        settingsMenu = FindObjectOfType<SettingsMenu>();
     }
 
     private void Update() {
@@ -41,8 +43,8 @@ public class PauseMenu : MonoBehaviour
     }
 
     public void ChangeSens(Slider slider) {
-        GameManager.instance.inputManager.ChangeSens(slider);
-        GameManager.instance.inputManager.GetText(curText);
+        settingsMenu.ChangeSens(slider);
+        settingsMenu.GetText(curText);
     }
 
     public void GetText(TextMeshProUGUI text) {

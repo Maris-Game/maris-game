@@ -53,25 +53,6 @@ public class InputManager : MonoBehaviour, IDataPersistence
         curDissapearText.enabled = false;
     }
 
-    public void ChangeSens(Slider slider) {
-        if(slider.name =="SensX Slider") {
-            sensX = slider.value;
-        } else if(slider.name == "SensY Slider") {
-            sensY = slider.value;
-        }
-        curText = slider.gameObject.transform.GetChild(3).GetComponent<TextMeshProUGUI>();
-        curText.enabled = true;
-        curText.text = Mathf.Round(slider.value).ToString();
-        StartCoroutine(dissapearText(curText, sensValueUIDelay));
-    }
-
-    public void askInput(string name) {
-        askingInput = true;
-        curName = name;
-        inputMenu.SetActive(true);
-        settingsMenu.SetActive(false);
-    }
-
     public void GetText(TextMeshProUGUI text) {
         curText = text;
     }
