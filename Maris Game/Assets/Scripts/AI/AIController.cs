@@ -64,8 +64,10 @@ public class AIController : MonoBehaviour
                     Debug.DrawLine(rayStartPos, hitInfo.transform.position, Color.red);
                 } else {
                     Debug.DrawLine(rayStartPos, hitInfo.transform.position, Color.yellow);
+                    
                 }
                 RotateToPlayer();
+                
             } 
         } else {
                 if(doPatrol) {

@@ -7,7 +7,6 @@ using TMPro;
 
 public class InputManager : MonoBehaviour, IDataPersistence
 {
-    public GameObject inputMenu;
     public GameObject settingsMenu;
     public bool askingInput;
     public float sensValueUIDelay = 2f;
@@ -36,54 +35,9 @@ public class InputManager : MonoBehaviour, IDataPersistence
     }
 
     private void Update() {
-        if(askingInput && inputMenu != null) {
-            if(Input.anyKeyDown) {
-                KeyCode curKey = checkKey();
-                int? curNum = isNumber(curKey);
-                
-                for(int i = 0; i < keyNames.Length; i++) {
-                    if(keyNames[i] == curName) {
-                        keys[i] = curKey;
-                    }
-                }
-                UpdateKeys();
-
-                if(curNum == null) {
-                    curText.text = curName + ": " + curKey;
-                } else { curText.text = curName + ": " + curNum; }
-                
-            }
-        }
-    }
-    private KeyCode checkKey() {
-        //check each key possible to see which key was just pressed
-        foreach(KeyCode kcode in Enum.GetValues(typeof(KeyCode)))
-        {
-            if (Input.GetKey(kcode)) {
-                askingInput = false;
-                inputMenu.SetActive(false);
-                settingsMenu.SetActive(true);
-                Debug.Log("Key clicked: " + kcode);
-                return kcode;    
-            } 
-        }   
-        return KeyCode.None; 
-    }
-    private int? isNumber(KeyCode key) {
-        //check if the key pressed is a number
-        for(int i = 48; i < 58; i++) {
-            if((KeyCode)i == key) {
-                if(i != 58) {
-                    return i - 48;
-                } else {
-                    return 0;
-                }
-            }
-        } 
-        return null;
     }
 
-    private void UpdateKeys() {
+    public void UpdateKeys() {
         forwardKey = keys[0];
         backwardKey = keys[1];
         leftKey = keys[2];
