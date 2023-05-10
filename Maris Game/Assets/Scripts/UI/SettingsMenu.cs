@@ -15,10 +15,6 @@ public class SettingsMenu : MonoBehaviour
     public float sensValueUIDelay = 2f;
     public string curName;
 
-    
-
-    
-
     [Header("Other Settings")]
     public bool isFullScreen;
     public bool pauseMenu = false;
@@ -26,13 +22,12 @@ public class SettingsMenu : MonoBehaviour
 
     [Header("UI objects")]
     public TMP_Dropdown resolutionDropdown;
+    public GameObject controlsMenu;
     public GameObject inputMenu;
-    public GameObject askInputMenu;
     public TextMeshProUGUI curText;
 
     private void Start() {
         inputManager = GameManager.instance.inputManager;
-        askInputMenu = GameObject.Find("inputMenu");
         
         //resolutions stuff
         resolutions = Screen.resolutions;
@@ -56,7 +51,6 @@ public class SettingsMenu : MonoBehaviour
         //checks if the scene is Main Menu, if not. The settings menu will be a pause menu
         if(SceneManager.GetActiveScene().name != "MainMenu") {
             pauseMenu = true;
-            inputMenu = GameObject.Find("Input Settings");
         }
     }
 
@@ -87,8 +81,8 @@ public class SettingsMenu : MonoBehaviour
         {
             if (Input.GetKey(kcode)) {
                 askingInput = false;
-                askInputMenu.SetActive(false);
-                inputMenu.SetActive(true);
+                inputMenu.SetActive(false);
+                controlsMenu.SetActive(true);
                 Debug.Log("Key clicked: " + kcode);
                 return kcode;    
             } 
@@ -109,8 +103,8 @@ public class SettingsMenu : MonoBehaviour
         return null;
     }
 
-    public void SetFullScreen(bool fullScreen) {
-        isFullScreen = fullScreen;
+    public void SetFullScreen(Toggle toggle) {
+        isFullScreen = toggle.isOn;
         Screen.fullScreen = isFullScreen;
         GameManager.instance.fullScreen = isFullScreen;
     }
@@ -134,8 +128,8 @@ public class SettingsMenu : MonoBehaviour
     public void askInput(string name) {
         askingInput = true;
         curName = name;
-        askInputMenu.SetActive(true);
-        inputMenu.SetActive(false);
+        inputMenu.SetActive(true);
+        controlsMenu.SetActive(false);
     }
 
     IEnumerator dissapearText(TextMeshProUGUI curDissapearText, float delay) {
