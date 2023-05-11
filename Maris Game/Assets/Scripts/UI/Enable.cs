@@ -18,12 +18,11 @@ public class Enable : MonoBehaviour
     public Slider slider;
 
     private void Start() {
+        inputManager = GameManager.instance.inputManager;
     }
 
     public void OnEnable() {
-        inputManager = GameManager.instance.inputManager;
-        if(settingSort[arrayIndex] == "Key") {
-            
+        if(settingSort[arrayIndex] == "Key") {      
             text.text = preText + ": " + inputManager.keys[keyNumberInManager].ToString();
         } else if(settingSort[arrayIndex] == "Slider") { 
             if(slider.gameObject.name.Contains("SensX")) {

@@ -48,6 +48,8 @@ MonoBehaviour:
   paused: 0
   localManager: {fileID: 0}
   inputManager: {fileID: 2414105340757899717}
+  dataManager: {fileID: 410567857805136299}
+  fullScreen: 0
 --- !u!114 &2414105340757899717
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -60,7 +62,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 008a908fbfdeb0941b63a25bcbb32ad9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inputMenu: {fileID: 0}
   settingsMenu: {fileID: 0}
   askingInput: 0
   sensValueUIDelay: 1.5
@@ -128,3 +129,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fileName: data.game
+  useEncryption: 0

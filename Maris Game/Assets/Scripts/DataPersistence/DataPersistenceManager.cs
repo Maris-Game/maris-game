@@ -15,16 +15,7 @@ public class DataPersistenceManager : MonoBehaviour
 
     public static DataPersistenceManager instance {get; private set;} 
 
-    private void Awake() {
-        if(instance != null) {
-            Destroy(this.gameObject);
-        }
-        instance = this;
-        DontDestroyOnLoad(this.gameObject);
-    }
-
     private void Start() {
-
         this.dataHandler = new FileDataHandeler(Application.persistentDataPath, fileName, useEncryption);
         this.dataPersistenceObjects = FindAllDataPersistenceObjects();
         LoadGame();

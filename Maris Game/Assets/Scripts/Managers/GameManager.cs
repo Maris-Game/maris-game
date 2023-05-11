@@ -10,6 +10,7 @@ public class GameManager : MonoBehaviour, IDataPersistence
     public bool paused;
     public LocalManager localManager;
     public InputManager inputManager;
+    public DataPersistenceManager dataManager;
 
     [Header("Settings")]
     public bool fullScreen;
@@ -23,15 +24,15 @@ public class GameManager : MonoBehaviour, IDataPersistence
 
         instance = this;
         DontDestroyOnLoad(instance.gameObject);
-        inputManager = GetComponent<InputManager>();
-        OnSceneLoaded();
         
     }
 
     public void OnSceneLoaded() {
-        this.transform.FindChild("DataManager").GetComponent<DataPersistenceManager>().LoadGame();
-        localManager = null;
-        localManager = FindObjectOfType<LocalManager>();
+        if(SceneManager.GetActiveScene().name != "Main Menu" || SceneManager.GetActiveScene().name != "Load Menu") {
+            dataManager.LoadGame();
+            localManager = null;
+            localManager = FindObjectOfType<LocalManager>();
+        }   
     }
 
     private void Update() {
