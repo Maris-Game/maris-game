@@ -29,6 +29,7 @@ public class GameManager : MonoBehaviour, IDataPersistence
     }
 
     public void OnSceneLoaded() {
+        this.transform.FindChild("DataManager").GetComponent<DataPersistenceManager>().LoadGame();
         localManager = null;
         localManager = FindObjectOfType<LocalManager>();
     }

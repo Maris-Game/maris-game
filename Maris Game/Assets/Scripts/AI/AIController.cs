@@ -14,6 +14,7 @@ public class AIController : MonoBehaviour
     private SphereCollider sc;
 
     public bool chase;
+    public bool chasing;
     public float yOffset; 
     public Vector3 rayStartPos;
     public Vector3 rayDirection;
@@ -57,18 +58,24 @@ public class AIController : MonoBehaviour
         if(Vector3.Angle(rayDirection, transform.forward) < fov / 2) {
             if(Physics.Raycast (transform.position, rayDirection, out hitInfo, visionDistance)) {
                 if(hitInfo.transform.tag == "Player") {
-                    //if the player doesnt have their face mask on or have their jacket on, chase the playe   
+                    //if the player doesnt have their face mask on or have their jacket on, chase the player 
                     if(!kledingScript.mondkapjeOp && chase || kledingScript.jasAan && chase) {
-                    Chase();
+                    chasing = true;
                     }
                     Debug.DrawLine(rayStartPos, hitInfo.transform.position, Color.red);
                 } else {
+                    chasing = false;
                     Debug.DrawLine(rayStartPos, hitInfo.transform.position, Color.yellow);
                     
                 }
-                RotateToPlayer();
-                
-            } 
+                RotateToPlayer();   
+            }
+
+            if(chasing) {
+                Chase();
+            }
+
+            
         } else {
                 if(doPatrol) {
                 Patrol();

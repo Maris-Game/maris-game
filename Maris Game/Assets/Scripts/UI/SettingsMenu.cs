@@ -111,9 +111,9 @@ public class SettingsMenu : MonoBehaviour
 
     public void ChangeSens(Slider slider) {
         if(slider.name =="SensX Slider") {
-            inputManager.sensX = slider.value;
+            GameManager.instance.inputManager.sensX = slider.value;
         } else if(slider.name == "SensY Slider") {
-            inputManager.sensY = slider.value;
+            GameManager.instance.inputManager.sensY = slider.value;
         }
         curText = slider.gameObject.transform.GetChild(3).GetComponent<TextMeshProUGUI>();
         curText.enabled = true;
