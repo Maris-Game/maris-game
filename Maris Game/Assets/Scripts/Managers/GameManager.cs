@@ -24,12 +24,12 @@ public class GameManager : MonoBehaviour, IDataPersistence
 
         instance = this;
         DontDestroyOnLoad(instance.gameObject);
-        
+        print(SceneManager.GetActiveScene().name);
     }
 
     public void OnSceneLoaded() {
-        if(SceneManager.GetActiveScene().name != "Main Menu" || SceneManager.GetActiveScene().name != "Load Menu") {
-            dataManager.LoadGame();
+        if(SceneManager.GetActiveScene().name != "Main Menu" && SceneManager.GetActiveScene().name != "Load Menu") {
+            dataManager.Invoke("LoadGame", 0.5f);
             localManager = null;
             localManager = FindObjectOfType<LocalManager>();
         }   
