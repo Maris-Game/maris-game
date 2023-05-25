@@ -10,26 +10,26 @@ public class DataPersistenceManager : MonoBehaviour
     [SerializeField] private bool useEncryption;
 
     public GameData gameData;
-    private List<IDataPersistence> StandardDataPersistenceObjects;
-    private List<IDataPersistence> OtherDataPersistenceObjects;
+    private List<IDataPersistence> DataPersistenceObjects;
     private FileDataHandeler dataHandler;
 
     public static DataPersistenceManager instance {get; private set;} 
 
     private void Start() {
         this.dataHandler = new FileDataHandeler(Application.persistentDataPath, fileName, useEncryption);
-        this.StandardDataPersistenceObjects = FindAllDataPersistenceObjects();
+        this.DataPersistenceObjects = FindAllDataPersistenceObjects();
         FirstLoad();
     }
 
     public void NewGame() {
         this.gameData = new GameData();
 
-        for(int i = 0; i < GameManager.instance.inputManager.keys.Count; i++) {
-            gameData.keys.Add(KeyCode.None);
-        }
         gameData.keys = GameManager.instance.inputManager.keys;
-        Debug.Log(gameData.keys);
+        //for(int i = 0; i < GameManager.instance.inputManager.keys.Count; i++) {
+        //    gameData.keys.Add(KeyCode.None);
+        //}
+        
+        
     }
 
     public void FirstLoad() {
@@ -44,23 +44,19 @@ public class DataPersistenceManager : MonoBehaviour
             NewGame();
         }
 
-        this.OtherDataPersistenceObjects = FindAllDataPersistenceObjects();
+        this.DataPersistenceObjects = FindAllDataPersistenceObjects();
+        
 
         //push data to scripts
-        foreach(IDataPersistence dataPersistenceObj in StandardDataPersistenceObjects) {
+        foreach(IDataPersistence dataPersistenceObj in DataPersistenceObjects) {
+            Debug.Log(dataPersistenceObj);
             dataPersistenceObj.LoadData(gameData);
-        }
-        foreach(IDataPersistence dataPersistenceObj in OtherDataPersistenceObjects) {
-            dataPersistenceObj.LoadData(gameData);        
         }
     }
 
     public void SaveGame() {
-        foreach(IDataPersistence dataPersistenceObj in StandardDataPersistenceObjects) {
+        foreach(IDataPersistence dataPersistenceObj in DataPersistenceObjects) {
             dataPersistenceObj.SaveData(ref gameData);
-        }
-        foreach(IDataPersistence dataPersistenceObj in OtherDataPersistenceObjects) {
-            dataPersistenceObj.SaveData(ref gameData);        
         }
 
         dataHandler.Save(gameData);

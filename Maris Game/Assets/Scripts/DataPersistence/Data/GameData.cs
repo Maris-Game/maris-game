@@ -11,7 +11,7 @@ public class GameData
 
     //collectibles
     public SerializableDictionary<string, bool> collectiblesCollected;
-    public List<KeyCode> keys = new List<KeyCode>();
+    public List<KeyCode> keys;
 
     public bool fullScreen;
 

@@ -6,7 +6,7 @@ public class LocalManager : MonoBehaviour
 {
     public GameManager gameManager;
 
-    private void Awake() {
+    private void Start() {
         gameManager = FindObjectOfType<GameManager>();
         gameManager.OnSceneLoaded();
     }

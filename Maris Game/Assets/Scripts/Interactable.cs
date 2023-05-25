@@ -15,13 +15,22 @@ public class Interactable : MonoBehaviour, IDataPersistence
         collectibleID = System.Guid.NewGuid().ToString();
     }
 
-    public void LoadData(GameData data) {
-        data.collectiblesCollected.TryGetValue(collectibleID, out collected);
+
+    public void Update() {
         if(collected) {
             this.gameObject.SetActive(false);
         }
     }
 
+
+    public void LoadData(GameData data) {
+        Debug.Log("Interactable Data Loaded)");
+        data.collectiblesCollected.TryGetValue(this.collectibleID, out collected);
+        Debug.Log(collected);
+    }
+
+
+     
     public void SaveData(ref GameData data) {
         if(data.collectiblesCollected.ContainsKey(collectibleID)) {
             data.collectiblesCollected.Remove(collectibleID);
