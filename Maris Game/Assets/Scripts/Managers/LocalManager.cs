@@ -8,6 +8,5 @@ public class LocalManager : MonoBehaviour
 
     private void Start() {
         gameManager = FindObjectOfType<GameManager>();
-        gameManager.OnSceneLoaded();
     }
 }

@@ -4,10 +4,12 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [System.Serializable]
+
 public class SerializableDictionary<TKey, TValue> : Dictionary<TKey, TValue>, ISerializationCallbackReceiver
 {
     [SerializeField] private List<TKey> id = new List <TKey>();
     [SerializeField] private List<TValue> values = new List<TValue>();
+    
     public void OnBeforeSerialize() {
         id.Clear();
         values.Clear();

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
+using UnityEngine.SceneManagement;
 
 public class DataPersistenceManager : MonoBehaviour
 {
@@ -15,21 +16,45 @@ public class DataPersistenceManager : MonoBehaviour
 
     public static DataPersistenceManager instance {get; private set;} 
 
-    private void Start() {
+    private void OnEnable () {
+        SceneManager.sceneLoaded += OnSceneLoaded;
+        SceneManager.sceneUnloaded += OnSceneUnloaded;
+    }
+
+    private void OnDisable() {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+        SceneManager.sceneUnloaded -= OnSceneUnloaded;
+    }
+
+    private void Awake() {
+        if (instance != null)
+        {
+            Destroy(this.gameObject);
+            return;
+        }
+        instance = this;
+        DontDestroyOnLoad(this.gameObject);
+
         this.dataHandler = new FileDataHandeler(Application.persistentDataPath, fileName, useEncryption);
+    }
+
+    public void OnSceneLoaded(Scene scene, LoadSceneMode mode) {
+        Debug.Log("Scene Loaded");
         this.DataPersistenceObjects = FindAllDataPersistenceObjects();
         FirstLoad();
     }
 
+
+    public void OnSceneUnloaded(Scene scene) {
+        Debug.Log("Scene Unloaded");
+        SaveGame();
+    }
+
+
     public void NewGame() {
         this.gameData = new GameData();
 
-        gameData.keys = GameManager.instance.inputManager.keys;
-        //for(int i = 0; i < GameManager.instance.inputManager.keys.Count; i++) {
-        //    gameData.keys.Add(KeyCode.None);
-        //}
-        
-        
+        gameData.keys = GameManager.instance.inputManager.keys;  
     }
 
     public void FirstLoad() {

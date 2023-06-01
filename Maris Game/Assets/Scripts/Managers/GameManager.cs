@@ -27,19 +27,9 @@ public class GameManager : MonoBehaviour, IDataPersistence
         print(SceneManager.GetActiveScene().name);
     }
 
-    public void OnSceneLoaded() {
-        if(SceneManager.GetActiveScene().name != "Main Menu" && SceneManager.GetActiveScene().name != "Load Menu") {
-            dataManager.LoadGame();
-            Debug.Log("dataManager.LoadGame");
-            localManager = null;
-            localManager = FindObjectOfType<LocalManager>();
-        }   
-    }
-
     public void LoadGame() {}
-    private void Update() {
-        
-    }
+    
+    private void Update() {}
     public void StartGame() {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     } 
