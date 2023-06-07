@@ -15,6 +15,8 @@ public class AIController : MonoBehaviour
 
     public bool chase;
     public bool chasing;
+    public bool seen;
+    public bool inSight; 
     public float yOffset; 
     public Vector3 rayStartPos;
     public Vector3 rayDirection;
@@ -61,13 +63,20 @@ public class AIController : MonoBehaviour
                     //if the player doesnt have their face mask on or have their jacket on, chase the player 
                     if(!kledingScript.mondkapjeOp && chase || kledingScript.jasAan && chase) {
                     chasing = true;
+                    seen = true;
+                    inSight = true;
+
+                    } else if(kledingScript.mondkapjeOp && chase && !inSight || kledingScript.jasAan && chase && !inSight) {
+                        chasing = false; 
+                        inSight = true;
                     }
                     Debug.DrawLine(rayStartPos, hitInfo.transform.position, Color.red);
                 } else {
+                    inSight = false;
                     chasing = false;
                     Debug.DrawLine(rayStartPos, hitInfo.transform.position, Color.yellow);
                     
-                }
+                } 
                 RotateToPlayer();   
             }
 
