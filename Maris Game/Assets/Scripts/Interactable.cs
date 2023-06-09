@@ -4,10 +4,11 @@ using UnityEngine;
 
 public class Interactable : MonoBehaviour, IDataPersistence
 {
-    public string[] interactSort = new string[] {"Collectible", "Coin"};
+    public string[] interactSort = new string[] {"Collectible", "Door"};
     public int arrayIndex = 0;
     public string collectibleName;
     public bool collected = false;
+    public bool canOpen = false;
     
     public string collectibleID;
     [ContextMenu("Generate ID for collectible")]
