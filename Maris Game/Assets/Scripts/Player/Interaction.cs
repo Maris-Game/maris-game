@@ -25,7 +25,7 @@ public class Interaction : MonoBehaviour
         }
         else {
             Debug.DrawLine(transform.position, transform.position + transform.forward * range, Color.green);
-            text.gameObject.SetActive(false);
+            
         }
 
         if(interactable != null) {
@@ -41,6 +41,10 @@ public class Interaction : MonoBehaviour
                     interactable = null;
                 }
             }
+        }
+
+        else {
+            text.gameObject.SetActive(false);
         }
     }
 }
