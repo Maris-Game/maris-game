@@ -92,6 +92,11 @@ public class AIController : MonoBehaviour
                     patrol.DoPatrol();
                 } 
                 RotateToPlayer();   
+            } else if(GameManager.instance.collectiblesCollected >= 3) {
+                chasing = true;
+                seen = true;
+                inSight = true;
+
             } else {
                 Debug.Log("Do Patrol");
                 patrol.DoPatrol();
