@@ -41,7 +41,7 @@ public class DataPersistenceManager : MonoBehaviour
     public void OnSceneLoaded(Scene scene, LoadSceneMode mode) {
         Debug.Log("Scene Loaded");
         this.DataPersistenceObjects = FindAllDataPersistenceObjects();
-        FirstLoad();
+        LoadGame();
     }
 
 
@@ -57,13 +57,8 @@ public class DataPersistenceManager : MonoBehaviour
         gameData.keys = GameManager.instance.inputManager.keys;  
     }
 
-    public void FirstLoad() {
-        this.gameData = dataHandler.Load();
-
-        LoadGame();
-    }
-
     public void LoadGame() {
+        this.gameData = dataHandler.Load();
         if(this.gameData == null) {
             Debug.Log("No data found");
             NewGame();

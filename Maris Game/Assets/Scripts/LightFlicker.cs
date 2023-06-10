@@ -4,31 +4,29 @@ using UnityEngine;
 
 public class LightFlicker : MonoBehaviour
 {
-    public Light _light;
-
-    public float minTime;
-    public float maxTime;
-    public float timer;
-
-
-    void Start() {
-        light = GetComponent<Light>();
-        timer = Random.Range(minTime, maxTime);
-    }
-    // Update is called once per frame
-    void Update()
-    {
-        FlickerLight();
-    }
-
-    private void FlickerLight() {
-        if(timer > 0) {
-            timer -= Time.deltaTime;
-        }
-
-        if(timer <=0) {
-            light.enabled = false;
-            timer = Random.Range(minTime, maxTime);
-        }
-    }
+	public Light light;
+	public float minWaitTime;
+	public float maxWaitTime;
+	public bool flash;
+	
+	void Start () {
+		light = GetComponent<Light>();
+		StartCoroutine(Flashing());
+	}
+	
+	void Update() {
+		if(GameManager.instance.collectiblesCollected == 3) {
+			flash = true;
+		} else {
+			flash = false;
+		}
+	}
+	IEnumerator Flashing ()
+	{
+		while (true)
+		{
+			yield return new WaitForSeconds(Random.Range(minWaitTime,maxWaitTime));
+			light.enabled = ! light.enabled;
+		}
+	}
 }

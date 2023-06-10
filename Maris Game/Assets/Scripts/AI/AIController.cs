@@ -24,7 +24,9 @@ public class AIController : MonoBehaviour
 
     //patrol
     [Header("Patrol")]
-    public Vector3 destPoint;
+    public Transform[] waypoints;
+    public Vector3 target;
+    public int wayPointNum;
     public bool doPatrol = true;
     public bool destPointSet;
     public float walkRange;
@@ -60,16 +62,24 @@ public class AIController : MonoBehaviour
         if(Vector3.Angle(rayDirection, transform.forward) < fov / 2) {
             if(Physics.Raycast (transform.position, rayDirection, out hitInfo, visionDistance)) {
                 if(hitInfo.transform.tag == "Player") {
-                    //if the player doesnt have their face mask on or have their jacket on, chase the player 
-                    if(!kledingScript.mondkapjeOp && chase || kledingScript.jasAan && chase) {
-                    chasing = true;
-                    seen = true;
-                    inSight = true;
-
-                    } else if(kledingScript.mondkapjeOp && chase && !inSight || kledingScript.jasAan && chase && !inSight) {
-                        chasing = false; 
+                    if(GameManager.instance.collectiblesCollected == 0) {
+                        chasing = false;
+                        seen = true;
                         inSight = true;
-                    }
+                    } else if(GameManager.instance.collectiblesCollected == 1) {
+                        if(!kledingScript.mondkapjeOp && chase) {
+                            chasing = true;
+                            seen = true;
+                            inSight = true;
+                    } 
+                    } else if(GameManager.instance.collectiblesCollected >= 2) {
+                        //if the player doesnt have their face mask on or have their jacket on, chase the player 
+                        if(!kledingScript.mondkapjeOp && chase || kledingScript.jasAan && chase) {
+                        chasing = true;
+                        seen = true;
+                        inSight = true;
+                    } }
+                    
                     Debug.DrawLine(rayStartPos, hitInfo.transform.position, Color.red);
                 } else {
                     inSight = false;
@@ -87,14 +97,17 @@ public class AIController : MonoBehaviour
             
         } else {
                 if(doPatrol) {
-                Patrol();
+                GetComponent<Patrol>().Patrol();
                 }
                 Debug.DrawLine(rayStartPos, transform.position + transform.forward * visionDistance, Color.green);
-            }
+        }
+
+        if(GameManager.instance.collectiblesCollected == 3) {
+            GetComponent<NavMeshAgent>().speed = 8f;
+        }
     }
 
     public void RotateToPlayer() {
-
         //makes the variable target to the player position and sets the y cordinate to 0
         Vector3 target = player.transform.position;
         target.y = 0;
@@ -116,25 +129,6 @@ public class AIController : MonoBehaviour
     }
 
 
-    private void Patrol() {
-        if(!doPatrol) {
-            return;
-        }
-        //sets a random point to walk towards (to be changed in the future to set points, when the map is implemented)
-        if(!destPointSet) {
-            float z = Random.Range(-walkRange, walkRange);
-            float x = Random.Range(-walkRange, walkRange);
 
-            destPoint = new Vector3(transform.position.x + x, transform.position.y, transform.position.z + z);
-            
-            if(Physics.Raycast(destPoint, Vector3.down, 6)) {
-                destPointSet = true;
-            }
-
-        } else { 
-            agent.SetDestination(destPoint); 
-            if(Vector3.Distance(transform.position, destPoint) < 20f) { destPointSet = false; }
-        }
-    }
     
 }

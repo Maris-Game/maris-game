@@ -1,12 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
+using UnityEngine.UI;
 
 public class LocalManager : MonoBehaviour
 {
-    public GameManager gameManager;
+    public TextMeshProUGUI collectiblesCollectedText;
 
-    private void Start() {
-        gameManager = FindObjectOfType<GameManager>();
+    void Update() {
+        collectiblesCollectedText.text = "Objects Collected " + GameManager.instance.collectiblesCollected + "/3";
     }
+
+    public void ReturnToMenu() {
+        GameManager.instance.ReturnToMenu();
+    }
+
 }

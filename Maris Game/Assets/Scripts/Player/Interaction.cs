@@ -9,10 +9,11 @@ public class Interaction : MonoBehaviour
     public Camera cam;
     public float range;
     public Interactable interactable;
-    public TextMeshProUGUI text;
+    public TextMeshProUGUI collectibleText;
+    public TextMeshProUGUI bombText;
 
     private void Awake() {
-        text.gameObject.SetActive(false);
+        collectibleText.gameObject.SetActive(false);
     }
 
     private void Update() {
@@ -30,8 +31,15 @@ public class Interaction : MonoBehaviour
 
         if(interactable != null) {
             if(interactable.interactSort[interactable.arrayIndex] == "Collectible") {
-                text.text = "Press Q to interact";
-                text.gameObject.SetActive(true);
+                collectibleText.text = "Press Q to interact";
+                collectibleText.gameObject.SetActive(true);
+            } else if(interactable.interactSort[interactable.arrayIndex] == "Bomb") {
+                if(GameManager.instance.canMakeBomb) {
+                    bombText.text = "Press Q to make bomb";
+                } else {
+                    bombText.text = "Still need " + (3 - GameManager.instance.collectiblesCollected) + " objects";
+                }
+                bombText.gameObject.SetActive(true);
             }
                 
             if(Input.GetKeyDown(KeyCode.Q)) {
@@ -40,11 +48,21 @@ public class Interaction : MonoBehaviour
                     interactable.Interacted();
                     interactable = null;
                 }
+                else if(interactable.interactSort[interactable.arrayIndex] == "Bomb") {
+                    Debug.Log("Made Bomb");
+                    if(GameManager.instance.canMakeBomb) {
+                        interactable.Interacted();
+                        bombText.gameObject.SetActive(false);
+                        interactable = null;
+                    }
+                    
+                }
             }
         }
 
         else {
-            text.gameObject.SetActive(false);
+            collectibleText.gameObject.SetActive(false);
+            bombText.gameObject.SetActive(false);
         }
     }
 }

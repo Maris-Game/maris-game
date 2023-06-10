@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Interactable : MonoBehaviour, IDataPersistence
 {
-    public string[] interactSort = new string[] {"Collectible", "Door"};
+    public string[] interactSort = new string[] {"Collectible", "Bomb"};
     public int arrayIndex = 0;
     public string collectibleName;
     public bool collected = false;
@@ -43,6 +43,10 @@ public class Interactable : MonoBehaviour, IDataPersistence
         if(this.interactSort[arrayIndex] == "Collectible") {
             this.collected = true;
             this.gameObject.SetActive(false);
+            if(this.collectibleName != "secret") {
+                GameManager.instance.collectiblesCollected++;
+            }
+            
         }
     }
 
