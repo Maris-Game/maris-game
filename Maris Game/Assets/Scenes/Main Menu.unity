@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.37311953, g: 0.38074014, b: 0.3587274, a: 1}
+  m_IndirectSpecularColor: {r: 0.3731193, g: 0.38073996, b: 0.35872698, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1500,17 +1500,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 436190175}
   m_CullTransparentMesh: 1
---- !u!114 &444218054 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 2414105340757899723, guid: f0303107a73ff0441b0f4e7b435c8536, type: 3}
-  m_PrefabInstance: {fileID: 2414105340590506765}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cc805538805f4034c9a614d364280e6e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &475077433
 GameObject:
   m_ObjectHideFlags: 0
@@ -9126,8 +9115,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 444218054}
-        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+      - m_Target: {fileID: 1777975199}
+        m_TargetAssemblyTypeName: Menu, Assembly-CSharp
         m_MethodName: StartGame
         m_Mode: 1
         m_Arguments:
@@ -9242,6 +9231,22 @@ PrefabInstance:
     - target: {fileID: 2414105340757899722, guid: f0303107a73ff0441b0f4e7b435c8536, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2414105340757899723, guid: f0303107a73ff0441b0f4e7b435c8536, type: 3}
+      propertyPath: collectibleIDs.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2414105340757899723, guid: f0303107a73ff0441b0f4e7b435c8536, type: 3}
+      propertyPath: collectibleIDs.Array.data[0]
+      value: 8991d118-4847-4dac-b373-9ec53a878755
+      objectReference: {fileID: 0}
+    - target: {fileID: 2414105340757899723, guid: f0303107a73ff0441b0f4e7b435c8536, type: 3}
+      propertyPath: collectibleIDs.Array.data[1]
+      value: ce4ca703-8ba3-4cbc-b73e-62c3140921b7
+      objectReference: {fileID: 0}
+    - target: {fileID: 2414105340757899723, guid: f0303107a73ff0441b0f4e7b435c8536, type: 3}
+      propertyPath: collectibleIDs.Array.data[2]
+      value: eb2a2502-9456-401c-ae94-e27ef20ed4e3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f0303107a73ff0441b0f4e7b435c8536, type: 3}

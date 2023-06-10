@@ -36,7 +36,10 @@ public class Interactable : MonoBehaviour, IDataPersistence
         if(data.collectiblesCollected.ContainsKey(collectibleID)) {
             data.collectiblesCollected.Remove(collectibleID);
         }
-        data.collectiblesCollected.Add(collectibleID, this.collected);
+
+        if(this.interactSort[arrayIndex] == "Collectible") {
+            data.collectiblesCollected.Add(collectibleID, this.collected);
+        }
     }
 
     public void Interacted() {

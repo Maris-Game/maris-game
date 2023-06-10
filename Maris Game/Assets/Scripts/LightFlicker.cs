@@ -5,8 +5,11 @@ using UnityEngine;
 public class LightFlicker : MonoBehaviour
 {
 	public Light light;
-	public float minWaitTime;
-	public float maxWaitTime;
+	public float minWaitTime = 0.1f;
+	public float maxWaitTime = 0.5f;
+
+	public float[] minWaitTimes = {2f, 1f, 0.5f, 0.1f};
+	public float[] maxWaitTimes = {3f, 2f, 1f, 0.5f};
 	public bool flash;
 	
 	void Start () {
@@ -15,10 +18,12 @@ public class LightFlicker : MonoBehaviour
 	}
 	
 	void Update() {
-		if(GameManager.instance.collectiblesCollected == 3) {
-			flash = true;
+		if(GameManager.instance.collectiblesCollected <= 3) {
+			minWaitTime = minWaitTimes[GameManager.instance.collectiblesCollected];
+			maxWaitTime = maxWaitTimes[GameManager.instance.collectiblesCollected];
 		} else {
-			flash = false;
+			minWaitTime = minWaitTimes[3];
+			maxWaitTime = maxWaitTimes[3];
 		}
 	}
 	IEnumerator Flashing ()

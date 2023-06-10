@@ -92,9 +92,17 @@ public class GameManager : MonoBehaviour, IDataPersistence
     }
 
     public void GameOver() {
+        if(collectiblesCollected == 0) {
+            return;
+        }
+
         gameOver = true;
         Cursor.lockState = CursorLockMode.None;
         SceneManager.LoadScene("Game Over");
+    }
+
+    public void Win() {
+        SceneManager.LoadScene("Outro");
     }
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode) {
@@ -105,7 +113,7 @@ public class GameManager : MonoBehaviour, IDataPersistence
 
         if(SceneManager.GetActiveScene().name == "Loading Screen") {
             loadBar = FindObjectOfType<Slider>();
-            StartCoroutine(LoadAsynchronously());
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
         }
     } 
 
@@ -119,16 +127,4 @@ public class GameManager : MonoBehaviour, IDataPersistence
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);    
         }
     }
-
-    IEnumerator LoadAsynchronously () {
-        AsyncOperation operation = SceneManager.LoadSceneAsync(SceneManager.GetActiveScene().buildIndex + 1);
-
-        while(!operation.isDone) {
-            float progress = Mathf.Clamp01(operation.progress / 0.9f);
-            Debug.Log(operation.progress);
-            loadBar.value = progress;
-            yield return null;
-        }
-    }
-
 }

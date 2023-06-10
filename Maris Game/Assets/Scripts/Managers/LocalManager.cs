@@ -9,7 +9,9 @@ public class LocalManager : MonoBehaviour
     public TextMeshProUGUI collectiblesCollectedText;
 
     void Update() {
-        collectiblesCollectedText.text = "Objects Collected " + GameManager.instance.collectiblesCollected + "/3";
+        if(collectiblesCollectedText != null) {
+            collectiblesCollectedText.text = "Objects Collected " + GameManager.instance.collectiblesCollected + "/3";
+        }
     }
 
     public void ReturnToMenu() {

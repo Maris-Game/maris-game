@@ -12,6 +12,7 @@ public class AIController : MonoBehaviour
     private Kleding kledingScript;
     private NavMeshAgent agent;
     private SphereCollider sc;
+    private Patrol patrol;
 
     public bool chase;
     public bool chasing;
@@ -24,11 +25,6 @@ public class AIController : MonoBehaviour
 
     //patrol
     [Header("Patrol")]
-    public Transform[] waypoints;
-    public Vector3 target;
-    public int wayPointNum;
-    public bool doPatrol = true;
-    public bool destPointSet;
     public float walkRange;
 
     [Header("Smooth Turning")]
@@ -42,6 +38,7 @@ public class AIController : MonoBehaviour
 
 
     private void Start() {
+        patrol = GetComponent<Patrol>();
         sc = GetComponent<SphereCollider>();
         agent = GetComponent<NavMeshAgent>();
         player = GameObject.Find("Player");
@@ -72,23 +69,33 @@ public class AIController : MonoBehaviour
                             seen = true;
                             inSight = true;
                     } 
-                    } else if(GameManager.instance.collectiblesCollected >= 2) {
+                    } else if(GameManager.instance.collectiblesCollected == 2) {
                         //if the player doesnt have their face mask on or have their jacket on, chase the player 
                         if(!kledingScript.mondkapjeOp && chase || kledingScript.jasAan && chase) {
                         chasing = true;
                         seen = true;
                         inSight = true;
-                    } }
+                        } 
+                    } else if(GameManager.instance.collectiblesCollected >= 3) {
+                        chasing = true;
+                        seen = true;
+                        inSight = true;
+
+                    }
                     
                     Debug.DrawLine(rayStartPos, hitInfo.transform.position, Color.red);
                 } else {
                     inSight = false;
                     chasing = false;
                     Debug.DrawLine(rayStartPos, hitInfo.transform.position, Color.yellow);
-                    
+                    Debug.Log("Do Patrol");
+                    patrol.DoPatrol();
                 } 
                 RotateToPlayer();   
-            }
+            } else {
+                Debug.Log("Do Patrol");
+                patrol.DoPatrol();
+            }        
 
             if(chasing) {
                 Chase();
@@ -96,14 +103,13 @@ public class AIController : MonoBehaviour
 
             
         } else {
-                if(doPatrol) {
-                GetComponent<Patrol>().Patrol();
-                }
-                Debug.DrawLine(rayStartPos, transform.position + transform.forward * visionDistance, Color.green);
+            Debug.Log("Do Patrol");
+            patrol.DoPatrol();
         }
+        
 
         if(GameManager.instance.collectiblesCollected == 3) {
-            GetComponent<NavMeshAgent>().speed = 8f;
+            agent.speed = 8f;
         }
     }
 

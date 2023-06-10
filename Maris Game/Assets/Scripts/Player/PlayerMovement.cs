@@ -21,8 +21,10 @@ public class PlayerMovement : MonoBehaviour
     
     private InputManager inputManager;
     private GameManager gameManager;
+    private Kleding kledingScript;
 
     private void Start() {
+        kledingScript = GetComponent<Kleding>();
         gameManager = GameManager.instance;
         inputManager = GameManager.instance.inputManager;
     }
@@ -46,7 +48,9 @@ public class PlayerMovement : MonoBehaviour
         Vector3 move = transform.right * x + transform.forward * z;
 
         if(Input.GetKey(inputManager.sprintKey)) {
-            move *= sprintMultiplier;
+            if(!kledingScript.mondkapjeOp) {
+                move *= sprintMultiplier;
+            }   
         }
         controller.Move(move * speed * Time.deltaTime);
 

@@ -52,6 +52,7 @@ public class Interaction : MonoBehaviour
                     Debug.Log("Made Bomb");
                     if(GameManager.instance.canMakeBomb) {
                         interactable.Interacted();
+                        GameManager.instance.Win();
                         bombText.gameObject.SetActive(false);
                         interactable = null;
                     }
