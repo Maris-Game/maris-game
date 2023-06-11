@@ -28,7 +28,8 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 116.39591, y: 148.19215, z: 27.480875}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 5589182085795956739}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -45,9 +46,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   paused: 0
+  vp: {fileID: 0}
+  loadBar: {fileID: 0}
   localManager: {fileID: 0}
   inputManager: {fileID: 2414105340757899717}
+  audioManager: {fileID: 0}
   dataManager: {fileID: 0}
+  collectibleIDs:
+  - 8991d118-4847-4dac-b373-9ec53a878755
+  - ce4ca703-8ba3-4cbc-b73e-62c3140921b7
+  - eb2a2502-9456-401c-ae94-e27ef20ed4e3
+  collectiblesCollected: 0
+  canMakeBomb: 0
+  gameOver: 0
   fullScreen: 0
 --- !u!114 &2414105340757899717
 MonoBehaviour:
@@ -84,3 +95,152 @@ MonoBehaviour:
   - ClothesOn
   sensX: 100
   sensY: 100
+--- !u!1 &4153495688226470042
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5589182085795956739}
+  - component: {fileID: 3531631061560795840}
+  m_Layer: 0
+  m_Name: AudioManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5589182085795956739
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4153495688226470042}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 2414105340757899722}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3531631061560795840
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4153495688226470042}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bc16480ce5855534f9ed080a31909dac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sounds:
+  - name: Laugh
+    clip: {fileID: 8300000, guid: 2204f1d9ad725464dbcc294a52a72b6c, type: 3}
+    volume: 1
+    pitch: 1
+    spatialBlend: 0
+    loop: 0
+    source: {fileID: 0}
+  - name: Ambience
+    clip: {fileID: 8300000, guid: 8fd51fd15f48ca94abfc13f52f558085, type: 3}
+    volume: 1
+    pitch: 1
+    spatialBlend: 0
+    loop: 1
+    source: {fileID: 0}
+  - name: Groet1.1
+    clip: {fileID: 8300000, guid: 3ca4035ec7caf3245a717b509ad15e8b, type: 3}
+    volume: 1
+    pitch: 1
+    spatialBlend: 0
+    loop: 0
+    source: {fileID: 0}
+  - name: Groet1.2
+    clip: {fileID: 8300000, guid: a9c0ad1bcf4aa314c9bb2528d0b9f0af, type: 3}
+    volume: 1
+    pitch: 1
+    spatialBlend: 0
+    loop: 0
+    source: {fileID: 0}
+  - name: kapje1
+    clip: {fileID: 8300000, guid: ee6747b02a16abb45a5bf48156a82256, type: 3}
+    volume: 1
+    pitch: 1
+    spatialBlend: 0
+    loop: 0
+    source: {fileID: 0}
+  - name: jas1
+    clip: {fileID: 8300000, guid: a541d8792c73a094e953e2da2e4009c8, type: 3}
+    volume: 1
+    pitch: 1
+    spatialBlend: 0
+    loop: 0
+    source: {fileID: 0}
+  - name: Boos1
+    clip: {fileID: 8300000, guid: 8f2e6f61f1ce6414fb7817185231d532, type: 3}
+    volume: 1
+    pitch: 1
+    spatialBlend: 0
+    loop: 0
+    source: {fileID: 0}
+  - name: Groet2
+    clip: {fileID: 8300000, guid: 7fb0dfee02113a84bb998f53fc14d2bf, type: 3}
+    volume: 1
+    pitch: 1
+    spatialBlend: 0
+    loop: 0
+    source: {fileID: 0}
+  - name: kapje2
+    clip: {fileID: 8300000, guid: ee6747b02a16abb45a5bf48156a82256, type: 3}
+    volume: 1
+    pitch: 1
+    spatialBlend: 0
+    loop: 0
+    source: {fileID: 0}
+  - name: Jas2
+    clip: {fileID: 8300000, guid: a541d8792c73a094e953e2da2e4009c8, type: 3}
+    volume: 1
+    pitch: 1
+    spatialBlend: 0
+    loop: 0
+    source: {fileID: 0}
+  - name: Boos2
+    clip: {fileID: 8300000, guid: 4779d599f72dac94fbeaaa3e5fd2de24, type: 3}
+    volume: 1
+    pitch: 1
+    spatialBlend: 0
+    loop: 0
+    source: {fileID: 0}
+  - name: Groet3
+    clip: {fileID: 8300000, guid: cb7b57a91c1ae684f9b0894c73215b09, type: 3}
+    volume: 1
+    pitch: 1
+    spatialBlend: 0
+    loop: 0
+    source: {fileID: 0}
+  - name: Kapje3
+    clip: {fileID: 8300000, guid: 4d8096df8f88a27459bbebecb9cd610a, type: 3}
+    volume: 1
+    pitch: 1
+    spatialBlend: 0
+    loop: 0
+    source: {fileID: 0}
+  - name: Jas3
+    clip: {fileID: 8300000, guid: 14fe0fa0a5a35d247a22065a8c0ac40c, type: 3}
+    volume: 1
+    pitch: 1
+    spatialBlend: 0
+    loop: 0
+    source: {fileID: 0}
+  - name: Boos3
+    clip: {fileID: 8300000, guid: 4427c2d7ef2109c4fb86955db1731796, type: 3}
+    volume: 1
+    pitch: 1
+    spatialBlend: 0
+    loop: 0
+    source: {fileID: 0}

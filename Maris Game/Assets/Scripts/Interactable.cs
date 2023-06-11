@@ -48,6 +48,9 @@ public class Interactable : MonoBehaviour, IDataPersistence
             this.gameObject.SetActive(false);
             if(this.collectibleName != "secret") {
                 GameManager.instance.collectiblesCollected++;
+                if(GameManager.instance.collectiblesCollected == 3) {
+                    GameManager.instance.audioManager.PlaySound("Laugh");
+                }
             }
             
         }

@@ -2,10 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.Audio;
 
 public class AIController : MonoBehaviour
 {
     public float visionDistance;
+    private AudioSource audioSource;
  
     
     private GameObject player;
@@ -23,6 +25,11 @@ public class AIController : MonoBehaviour
     public Vector3 rayDirection;
     public float fov;
 
+    public string[] normalSounds;
+    public string[] kapjeSounds;
+    public string[] jasSounds;
+    public string[] angrySounds;
+
     //patrol
     [Header("Patrol")]
     public float walkRange;
@@ -38,6 +45,7 @@ public class AIController : MonoBehaviour
 
 
     private void Start() {
+        audioSource = GetComponent<AudioSource>();
         patrol = GetComponent<Patrol>();
         sc = GetComponent<SphereCollider>();
         agent = GetComponent<NavMeshAgent>();
@@ -77,6 +85,7 @@ public class AIController : MonoBehaviour
                         inSight = true;
                         } 
                     } else if(GameManager.instance.collectiblesCollected >= 3) {
+                        patrol.enabled = false;
                         chasing = true;
                         seen = true;
                         inSight = true;
@@ -93,6 +102,7 @@ public class AIController : MonoBehaviour
                 } 
                 RotateToPlayer();   
             } else if(GameManager.instance.collectiblesCollected >= 3) {
+                patrol.enabled = false;
                 chasing = true;
                 seen = true;
                 inSight = true;
@@ -139,7 +149,79 @@ public class AIController : MonoBehaviour
         agent.SetDestination(player.transform.position);
     }
 
+    public void PlayRandomSound() {
+        Debug.Log("PLay Random Sound");
+        int randomNum = Mathf.RoundToInt(Random.Range(0f, 1f));
+        int collected = GameManager.instance.collectiblesCollected;
+        AudioManager audioManager = GameManager.instance.audioManager;
 
+        if(collected == 0) {
+            
+            int index = Mathf.RoundToInt(Random.Range(0f, 1f));
+            string curName = normalSounds[index];
+            AudioClip clip = audioManager.FindClip(curName);
+            this.audioSource.clip = clip;
+            this.audioSource.Play();
 
-    
+        }
+        
+        else if(collected == 1) {
+            int index = Mathf.RoundToInt(Random.Range(2f, 3f));
+            
+            if(!kledingScript.mondkapjeOp && randomNum == 1) {
+                
+                string curName = kapjeSounds[0];
+                AudioClip clip = audioManager.FindClip(curName);
+                this.audioSource.clip = clip;   
+
+            } else if(kledingScript.jasAan && randomNum == 1) {
+
+                string curName = jasSounds[0];
+                AudioClip clip = audioManager.FindClip(curName);
+                this.audioSource.clip = clip;
+
+            } else {
+                
+                string curName = normalSounds[index];
+                AudioClip clip = audioManager.FindClip(curName);
+                this.audioSource.clip = clip;
+            }
+
+            this.audioSource.Play();
+        } 
+        
+        else if(collected == 2) {
+            int index = Mathf.RoundToInt(Random.Range(4f, 5f));
+
+            if(!kledingScript.mondkapjeOp && randomNum == 1) {
+
+                string curName = kapjeSounds[1];
+                AudioClip clip = audioManager.FindClip(curName);
+                this.audioSource.clip = clip;
+
+            } else if(kledingScript.jasAan && randomNum == 1) {
+
+                string curName = jasSounds[1];
+                AudioClip clip = audioManager.FindClip(curName);
+                this.audioSource.clip = clip;
+
+            } else {
+
+                string curName = normalSounds[index];
+                AudioClip clip = audioManager.FindClip(curName);
+                this.audioSource.clip = clip;
+
+            }
+
+            this.audioSource.Play();
+        } 
+        
+        else if(collected >= 3) {
+            int index = Mathf.RoundToInt(Random.Range(0f, 1f));
+            string curName = angrySounds[index];
+            AudioClip clip = audioManager.FindClip(curName);
+            this.audioSource.clip = clip;
+            this.audioSource.Play();
+        }
+    }
 }

@@ -13,6 +13,7 @@ public class HearingPlayer : MonoBehaviour
     //if the player enters the sphere collider (AKA hearing range) rotate the AI towards the player
     private void OnTriggerEnter(Collider other) {
         if(other.gameObject.tag == "Player") {
+            aiController.PlayRandomSound();
             aiController.RotateToPlayer();
             aiController.hearingPlayer = true;
         }

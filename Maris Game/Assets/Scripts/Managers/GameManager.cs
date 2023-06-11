@@ -17,6 +17,7 @@ public class GameManager : MonoBehaviour, IDataPersistence
     public static GameManager instance;
     public LocalManager localManager;
     public InputManager inputManager;
+    public AudioManager audioManager;
     public DataPersistenceManager dataManager;
 
     [Header("Collectibles/Game booleans")]
@@ -49,6 +50,9 @@ public class GameManager : MonoBehaviour, IDataPersistence
         instance = this;
         DontDestroyOnLoad(instance.gameObject);
         print(SceneManager.GetActiveScene().name);
+
+        inputManager = GetComponent<InputManager>();
+        audioManager = GetComponentInChildren<AudioManager>();
     }
     
     private void Update() {
@@ -64,6 +68,7 @@ public class GameManager : MonoBehaviour, IDataPersistence
     public void LoadData(GameData data) {
         this.fullScreen = data.fullScreen;
 
+        collectiblesCollected = 0;
         for(int i = 0; i < collectibleIDs.Length; i++) {
             data.collectiblesCollected.TryGetValue(collectibleIDs[i], out curCollected);
             if(curCollected) {
@@ -114,6 +119,10 @@ public class GameManager : MonoBehaviour, IDataPersistence
         if(SceneManager.GetActiveScene().name == "Loading Screen") {
             loadBar = FindObjectOfType<Slider>();
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        }
+
+        if(SceneManager.GetActiveScene().name == "Maris") {
+            audioManager.PlaySound("Ambience");
         }
     } 
 
