@@ -13,6 +13,8 @@ public class LightFlicker : MonoBehaviour
 	public float[] minWaitTimes = {2f, 1f, 0.5f, 0.1f};
 	public float[] maxWaitTimes = {3f, 2f, 1f, 0.5f};
 	public bool flash;
+	public bool playingSound;
+	private int collected;
 	
 	void Start () {
 		audioSource = GetComponent<AudioSource>();
@@ -30,23 +32,34 @@ public class LightFlicker : MonoBehaviour
 		}
 
 		if(audioSource != null) {
-			int collected = GameManager.instance.collectiblesCollected;
 			AudioManager audioManager = GameManager.instance.audioManager;
-
-			if(collected == 0) {
-				AudioClip clip = audioManager.FindClip("Lights1");
+			if(!audioSource.isPlaying) {
+				collected = GameManager.instance.collectiblesCollected;
+				if(collected == 0) {
+					AudioClip clip = audioManager.FindClip("Lights1");
+					audioSource.clip = clip;
+					audioSource.Play();	
+				} else if(collected == 1) {
+					AudioClip clip = audioManager.FindClip("Lights2");
+				audioSource.clip = clip;
 				audioSource.Play();	
-			} else if(collected == 1) {
-				AudioClip clip = audioManager.FindClip("Lights2");
-				audioSource.Play();	
-			} else if(collected == 2) {
+				} else if(collected == 2) {
 				AudioClip clip = audioManager.FindClip("Lights3");
+				audioSource.clip = clip;
 				audioSource.Play();	
-			} else if(collected >= 3) {
-				AudioClip clip = audioManager.FindClip("Lights4");
-				audioSource.Play();	
+				} else if(collected >= 3) {
+					AudioClip clip = audioManager.FindClip("Lights4");
+					audioSource.clip = clip;
+					audioSource.Play();	
+				}
 			}
+			
+
+			if(collected != GameManager.instance.collectiblesCollected) {
+				audioSource.Stop();
+		}	
 		}
+		
 	}
 	IEnumerator Flashing ()
 	{

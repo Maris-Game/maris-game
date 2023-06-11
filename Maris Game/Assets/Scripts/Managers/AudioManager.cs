@@ -31,6 +31,7 @@ public class AudioManager : MonoBehaviour
         if(s != null) {
             return s.source.clip;
         }
+        Debug.LogError("Audio Clip: " + name + " not found");
         return null;
     }
 

@@ -244,3 +244,52 @@ MonoBehaviour:
     spatialBlend: 0
     loop: 0
     source: {fileID: 0}
+  - name: Lights1
+    clip: {fileID: 8300000, guid: 47463db05ade604439ab1869e4752d5b, type: 3}
+    volume: 1
+    pitch: 1
+    spatialBlend: 0
+    loop: 0
+    source: {fileID: 0}
+  - name: Lights2
+    clip: {fileID: 8300000, guid: bbcc950f020922f408f050b072d2cc88, type: 3}
+    volume: 1
+    pitch: 1
+    spatialBlend: 0
+    loop: 0
+    source: {fileID: 0}
+  - name: Lights3
+    clip: {fileID: 8300000, guid: 08d9d10d702ae704e91d3f5edc28c9c4, type: 3}
+    volume: 1
+    pitch: 1
+    spatialBlend: 0
+    loop: 0
+    source: {fileID: 0}
+  - name: Lights4
+    clip: {fileID: 8300000, guid: b69165bf55dc6164ca6120c797de4eb6, type: 3}
+    volume: 1
+    pitch: 1
+    spatialBlend: 0
+    loop: 0
+    source: {fileID: 0}
+  - name: Walking
+    clip: {fileID: 8300000, guid: 2e4a73dcfa9780a409a6d60f41294332, type: 3}
+    volume: 1
+    pitch: 1
+    spatialBlend: 1
+    loop: 1
+    source: {fileID: 0}
+  - name: Sprinting
+    clip: {fileID: 8300000, guid: 87c4d47aa9322ce4784e25d53e58f255, type: 3}
+    volume: 1
+    pitch: 1
+    spatialBlend: 1
+    loop: 1
+    source: {fileID: 0}
+  - name: Item Collected
+    clip: {fileID: 8300000, guid: 21ce1b8517df548428a272747a29f9f7, type: 3}
+    volume: 0.2
+    pitch: 1
+    spatialBlend: 0
+    loop: 0
+    source: {fileID: 0}

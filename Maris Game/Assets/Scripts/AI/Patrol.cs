@@ -5,6 +5,7 @@ using UnityEngine;
 public class Patrol : MonoBehaviour
 {
     private UnityEngine.AI.NavMeshAgent agent;
+    private AIController AIcontroller;
     public Transform[] waypoints;
     public Vector3 target;
     public bool destPointSet;
@@ -13,6 +14,7 @@ public class Patrol : MonoBehaviour
     public float checkRange = 2f;
 
     private void Start() {
+        AIcontroller = GetComponent<AIController>();
         agent = GetComponent<UnityEngine.AI.NavMeshAgent>();
     }
 
@@ -22,20 +24,19 @@ public class Patrol : MonoBehaviour
         }
 
         float dist = Vector3.Distance(transform.position, target);
-        Debug.Log(dist);
         //chooses a random waypoint
         if(!destPointSet) {
             wayPointNum = Random.Range(0, waypoints.Length);
             target = waypoints[wayPointNum].position;
             if(Vector3.Distance(transform.position, target) > checkRange) {
                 destPointSet = true;
-                Debug.Log("Didnt Reach waypoint");
+                AIcontroller.walking = true;
             }
         } else { 
             agent.SetDestination(target); 
             if(Vector3.Distance(transform.position, target) < checkRange) { 
-                Debug.Log("Reached waypoint");
                 destPointSet = false; 
+                AIcontroller.walking = false;
             }
         }
     }

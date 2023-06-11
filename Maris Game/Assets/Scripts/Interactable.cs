@@ -5,6 +5,7 @@ using UnityEngine;
 public class Interactable : MonoBehaviour, IDataPersistence
 {
     public string[] interactSort = new string[] {"Collectible", "Bomb"};
+    public Transform[] spawnPoints;
     public int arrayIndex = 0;
     public string collectibleName;
     public bool collected = false;
@@ -16,6 +17,14 @@ public class Interactable : MonoBehaviour, IDataPersistence
         collectibleID = System.Guid.NewGuid().ToString();
     }
 
+    private void Awake() {
+        if(this.interactSort[arrayIndex] == "Collectible" && collectibleName != "secret") {
+            int index = Mathf.RoundToInt(Random.Range(0f, spawnPoints.Length));
+            Debug.Log(index);
+            this.transform.position = spawnPoints[index].position;
+            this.transform.rotation = spawnPoints[index].rotation;
+        }
+    }
 
     public void Update() {
         if(collected) {
@@ -44,6 +53,7 @@ public class Interactable : MonoBehaviour, IDataPersistence
 
     public void Interacted() {
         if(this.interactSort[arrayIndex] == "Collectible") {
+            GameManager.instance.audioManager.PlaySound("Item Collected");
             this.collected = true;
             this.gameObject.SetActive(false);
             if(this.collectibleName != "secret") {

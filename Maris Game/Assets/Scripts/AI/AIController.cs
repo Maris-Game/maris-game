@@ -8,7 +8,7 @@ public class AIController : MonoBehaviour
 {
     public float visionDistance;
     private AudioSource audioSource;
- 
+    public AudioSource walkingAudio;
     
     private GameObject player;
     private Kleding kledingScript;
@@ -24,6 +24,7 @@ public class AIController : MonoBehaviour
     public Vector3 rayStartPos;
     public Vector3 rayDirection;
     public float fov;
+    public bool walking = false;
 
     public string[] normalSounds;
     public string[] kapjeSounds;
@@ -97,7 +98,6 @@ public class AIController : MonoBehaviour
                     inSight = false;
                     chasing = false;
                     Debug.DrawLine(rayStartPos, hitInfo.transform.position, Color.yellow);
-                    Debug.Log("Do Patrol");
                     patrol.DoPatrol();
                 } 
                 RotateToPlayer();   
@@ -108,23 +108,35 @@ public class AIController : MonoBehaviour
                 inSight = true;
 
             } else {
-                Debug.Log("Do Patrol");
                 patrol.DoPatrol();
             }        
 
             if(chasing) {
+                walking = true;
                 Chase();
             }
 
             
         } else {
-            Debug.Log("Do Patrol");
             patrol.DoPatrol();
         }
         
 
         if(GameManager.instance.collectiblesCollected == 3) {
             agent.speed = 8f;
+        }
+
+        if(walking) {
+
+            if(!this.walkingAudio.isPlaying) {
+                AudioClip clip = GameManager.instance.audioManager.FindClip("Walking");
+                this.walkingAudio.clip = clip;
+                this.walkingAudio.Play();
+                Debug.Log("Play Walking Sound");
+            }
+            
+        } else if(!walking) {
+            this.walkingAudio.Stop();
         }
     }
 
@@ -166,8 +178,6 @@ public class AIController : MonoBehaviour
         }
         
         else if(collected == 1) {
-            int index = Mathf.RoundToInt(Random.Range(2f, 3f));
-            
             if(!kledingScript.mondkapjeOp && randomNum == 1) {
                 
                 string curName = kapjeSounds[0];
@@ -182,7 +192,7 @@ public class AIController : MonoBehaviour
 
             } else {
                 
-                string curName = normalSounds[index];
+                string curName = normalSounds[2];
                 AudioClip clip = audioManager.FindClip(curName);
                 this.audioSource.clip = clip;
             }
@@ -191,8 +201,6 @@ public class AIController : MonoBehaviour
         } 
         
         else if(collected == 2) {
-            int index = Mathf.RoundToInt(Random.Range(4f, 5f));
-
             if(!kledingScript.mondkapjeOp && randomNum == 1) {
 
                 string curName = kapjeSounds[1];
@@ -207,7 +215,7 @@ public class AIController : MonoBehaviour
 
             } else {
 
-                string curName = normalSounds[index];
+                string curName = normalSounds[3];
                 AudioClip clip = audioManager.FindClip(curName);
                 this.audioSource.clip = clip;
 
@@ -217,7 +225,7 @@ public class AIController : MonoBehaviour
         } 
         
         else if(collected >= 3) {
-            int index = Mathf.RoundToInt(Random.Range(0f, 1f));
+            int index = Mathf.RoundToInt(Random.Range(0f, 2f));
             string curName = angrySounds[index];
             AudioClip clip = audioManager.FindClip(curName);
             this.audioSource.clip = clip;
