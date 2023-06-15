@@ -282,7 +282,7 @@ MonoBehaviour:
     loop: 1
     source: {fileID: 0}
   - name: Sprinting
-    clip: {fileID: 8300000, guid: 87c4d47aa9322ce4784e25d53e58f255, type: 3}
+    clip: {fileID: 8300000, guid: 6bad6a83b27107e47998a5a041151919, type: 3}
     volume: 1
     pitch: 1
     spatialBlend: 1

@@ -19,7 +19,8 @@ public class AIController : MonoBehaviour
     public bool chase;
     public bool chasing;
     public bool seen;
-    public bool inSight; 
+    public bool inSight;
+    public bool playedSound;
     public float yOffset; 
     public Vector3 rayStartPos;
     public Vector3 rayDirection;
@@ -55,9 +56,6 @@ public class AIController : MonoBehaviour
     }
 
     private void Update() {
-        if(hearingPlayer) {
-            RotateToPlayer();
-        }
         
         rayStartPos = new Vector3(transform.position.x, transform.position.y + yOffset, transform.position.z);
         rayDirection = player.transform.position - this.transform.position;
@@ -70,25 +68,23 @@ public class AIController : MonoBehaviour
                 if(hitInfo.transform.tag == "Player") {
                     if(GameManager.instance.collectiblesCollected == 0) {
                         chasing = false;
-                        seen = true;
                         inSight = true;
                     } else if(GameManager.instance.collectiblesCollected == 1) {
                         if(!kledingScript.mondkapjeOp && chase) {
                             chasing = true;
                             seen = true;
                             inSight = true;
-                    } 
+                        } 
                     } else if(GameManager.instance.collectiblesCollected == 2) {
                         //if the player doesnt have their face mask on or have their jacket on, chase the player 
                         if(!kledingScript.mondkapjeOp && chase || kledingScript.jasAan && chase) {
-                        chasing = true;
-                        seen = true;
-                        inSight = true;
+                            chasing = true;
+                            seen = true;
+                            inSight = true;
                         } 
                     } else if(GameManager.instance.collectiblesCollected >= 3) {
                         patrol.enabled = false;
                         chasing = true;
-                        seen = true;
                         inSight = true;
 
                     }
@@ -97,10 +93,10 @@ public class AIController : MonoBehaviour
                 } else {
                     inSight = false;
                     chasing = false;
+                    seen = false;
                     Debug.DrawLine(rayStartPos, hitInfo.transform.position, Color.yellow);
                     patrol.DoPatrol();
-                } 
-                RotateToPlayer();   
+                }   
             } else if(GameManager.instance.collectiblesCollected >= 3) {
                 patrol.enabled = false;
                 chasing = true;
@@ -111,7 +107,11 @@ public class AIController : MonoBehaviour
                 patrol.DoPatrol();
             }        
 
-            if(chasing) {
+            if(inSight || seen) {
+                RotateToPlayer();
+            }
+
+            if(chasing || seen) {
                 walking = true;
                 Chase();
             }
@@ -162,6 +162,10 @@ public class AIController : MonoBehaviour
     }
 
     public void PlayRandomSound() {
+        if(audioSource.isPlaying) {
+            return;
+        }
+
         Debug.Log("PLay Random Sound");
         int randomNum = Mathf.RoundToInt(Random.Range(0f, 1f));
         int collected = GameManager.instance.collectiblesCollected;

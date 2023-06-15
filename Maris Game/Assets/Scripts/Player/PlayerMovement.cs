@@ -20,13 +20,12 @@ public class PlayerMovement : MonoBehaviour
 
     private Vector3 velocity;
     private bool grounded;
-    public bool horizontal = false;
-    public bool vertical = false;
+    public bool walking = false;
     public bool sprinting = false;
     
     private InputManager inputManager;
     private GameManager gameManager;
-    private Kleding kledingScript;
+    public Kleding kledingScript;
 
     private void Start() {
         audioSource = GetComponent<AudioSource>();
@@ -41,23 +40,23 @@ public class PlayerMovement : MonoBehaviour
         //Vertical Inputs
         if(Input.GetKey(inputManager.forwardKey)) {
             z = 1f;
-            vertical = true;
+            walking = true;
         } else if(Input.GetKey(inputManager.backwardKey)) {
             z = -1f;
-            vertical = true;
+            walking = true;
         } else {
-            vertical = false;
+            walking = false;
         }
         //Horizontal Inputs
         if(Input.GetKey(inputManager.rightKey)) {
             x = 1f;
-            horizontal = true;
+            walking = true;
         }
         else if(Input.GetKey(inputManager.leftKey)) {
             x = -1f;
-            horizontal = true;
+            walking = true;
         } else {
-            horizontal = false;
+            walking = false;
         }
         Vector3 move = transform.right * x + transform.forward * z;
 
@@ -74,8 +73,8 @@ public class PlayerMovement : MonoBehaviour
         controller.Move(move * speed * Time.deltaTime);
 
 
-        if(horizontal && !sprinting || vertical && !sprinting ) {
-            if(this.audioSource.clip.name == "Walking fast (sprint)") {
+        if(walking && !sprinting) {
+            if(this.audioSource.clip.name == "Walking fast ") {
                 this.audioSource.Stop();
             }
 
@@ -86,12 +85,12 @@ public class PlayerMovement : MonoBehaviour
                 Debug.Log("Play Walking Sound");
             }
             
-        } else if(!horizontal && !vertical) {
+        } else if(!walking) {
             this.audioSource.Stop();
         }
 
-        if(horizontal && sprinting || vertical && sprinting) {
-            if(audioSource.clip.name == "Walking slow") {
+        if(walking && sprinting) {
+            if(audioSource.clip.name == "Walking slow ") {
                 this.audioSource.Stop();
             }
             if(!this.audioSource.isPlaying) {

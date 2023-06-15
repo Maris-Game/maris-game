@@ -22,12 +22,6 @@ public class Enable : MonoBehaviour
     }
 
     public void OnEnable() {
-        if(inputManager.sensX == null || inputManager.sensY == null) { 
-            Debug.LogError("Data is null");
-            return;
-        }
-
-
         if(settingSort[arrayIndex] == "Key") {   
             text.text = preText + ": " + inputManager.keys[keyNumberInManager].ToString();
         } else if(settingSort[arrayIndex] == "Slider") { 
