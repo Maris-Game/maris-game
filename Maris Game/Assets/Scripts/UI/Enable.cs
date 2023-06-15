@@ -22,9 +22,16 @@ public class Enable : MonoBehaviour
     }
 
     public void OnEnable() {
-        if(settingSort[arrayIndex] == "Key") {      
+        if(inputManager.sensX == null || inputManager.sensY == null) { 
+            Debug.LogError("Data is null");
+            return;
+        }
+
+
+        if(settingSort[arrayIndex] == "Key") {   
             text.text = preText + ": " + inputManager.keys[keyNumberInManager].ToString();
         } else if(settingSort[arrayIndex] == "Slider") { 
+
             if(slider.gameObject.name.Contains("SensX")) {
                 slider.value = inputManager.sensX;
             } else if (slider.gameObject.name.Contains("SensY")) {

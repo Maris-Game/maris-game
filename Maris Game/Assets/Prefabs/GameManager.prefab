@@ -82,8 +82,9 @@ MonoBehaviour:
   sprintKey: 304
   pauseKey: 27
   switchClothKey: 9
-  clothesOn: 101
-  keys: 77000000730000006100000064000000300100001b0000000900000065000000
+  clothesOnKey: 101
+  interactKey: 113
+  keys: 77000000730000006100000064000000300100001b000000090000006500000071000000
   keyNames:
   - Forward
   - Backward
@@ -93,6 +94,7 @@ MonoBehaviour:
   - Pause
   - SwitchClothes
   - ClothesOn
+  - Interact
   sensX: 100
   sensY: 100
 --- !u!1 &4153495688226470042
@@ -141,7 +143,7 @@ MonoBehaviour:
   sounds:
   - name: Laugh
     clip: {fileID: 8300000, guid: 2204f1d9ad725464dbcc294a52a72b6c, type: 3}
-    volume: 1
+    volume: 0.8
     pitch: 1
     spatialBlend: 0
     loop: 0
@@ -195,7 +197,7 @@ MonoBehaviour:
     spatialBlend: 0
     loop: 0
     source: {fileID: 0}
-  - name: kapje2
+  - name: Kapje
     clip: {fileID: 8300000, guid: ee6747b02a16abb45a5bf48156a82256, type: 3}
     volume: 1
     pitch: 1
@@ -288,6 +290,13 @@ MonoBehaviour:
     source: {fileID: 0}
   - name: Item Collected
     clip: {fileID: 8300000, guid: 21ce1b8517df548428a272747a29f9f7, type: 3}
+    volume: 0.2
+    pitch: 1
+    spatialBlend: 0
+    loop: 0
+    source: {fileID: 0}
+  - name: ClothesOn
+    clip: {fileID: 8300000, guid: e79ad0720da23074c9db6d6afc4358d1, type: 3}
     volume: 0.2
     pitch: 1
     spatialBlend: 0

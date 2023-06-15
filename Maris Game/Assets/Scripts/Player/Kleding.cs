@@ -38,7 +38,8 @@ public class Kleding : MonoBehaviour
         if(!mondkapje) {
             return;
         }
-        if(Input.GetKeyDown(KeyCode.E)) {
+        if(Input.GetKeyDown(inputManager.clothesOnKey)) {
+            GameManager.instance.audioManager.PlaySound("ClothesOn");
             if(!mondkapjeOp) {
                 mondkapjeOp = true;
                 anim.Play("mondkapjeOp", 1);
@@ -54,7 +55,8 @@ public class Kleding : MonoBehaviour
         if(!jas) {
             return;
         }
-        if(Input.GetKeyDown(KeyCode.E)) {
+        if(Input.GetKeyDown(inputManager.clothesOnKey)) {
+            GameManager.instance.audioManager.PlaySound("ClothesOn");
             if(!jasAan) {
                 jasAan = true;
                 anim.Play("JasAan", 2);

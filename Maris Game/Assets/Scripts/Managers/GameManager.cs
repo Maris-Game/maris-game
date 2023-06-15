@@ -61,7 +61,7 @@ public class GameManager : MonoBehaviour, IDataPersistence
         }
     }
 
-    public void StartGame() {
+    public void LoadNextScene() {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     } 
 
@@ -104,9 +104,11 @@ public class GameManager : MonoBehaviour, IDataPersistence
         gameOver = true;
         Cursor.lockState = CursorLockMode.None;
         SceneManager.LoadScene("Game Over");
+        audioManager.StopAllSounds();
     }
 
     public void Win() {
+        audioManager.StopAllSounds();
         SceneManager.LoadScene("Outro");
     }
 

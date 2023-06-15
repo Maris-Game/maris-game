@@ -22,7 +22,8 @@ public class InputManager : MonoBehaviour, IDataPersistence
     public KeyCode sprintKey = KeyCode.LeftShift;
     public KeyCode pauseKey = KeyCode.Escape;
     public KeyCode switchClothKey = KeyCode.Tab; 
-    public KeyCode clothesOn = KeyCode.E;
+    public KeyCode clothesOnKey = KeyCode.E;
+    public KeyCode interactKey = KeyCode.Q;
     public List<KeyCode> keys;
     public string[] keyNames;
 
@@ -45,7 +46,8 @@ public class InputManager : MonoBehaviour, IDataPersistence
         sprintKey = keys[4];
         pauseKey = keys[5];
         switchClothKey = keys[6]; 
-        clothesOn = keys[7];
+        clothesOnKey = keys[7];
+        interactKey = keys[8];
     } 
 
     IEnumerator dissapearText(TextMeshProUGUI curDissapearText, float delay) {

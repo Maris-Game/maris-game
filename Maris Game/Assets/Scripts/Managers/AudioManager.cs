@@ -35,4 +35,10 @@ public class AudioManager : MonoBehaviour
         return null;
     }
 
+    public void StopAllSounds() {
+        foreach (Sound s in sounds) {
+            s.source.Stop();
+        }
+    }
+
 }

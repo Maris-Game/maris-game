@@ -110,6 +110,7 @@ public class SettingsMenu : MonoBehaviour
     }
 
     public void ChangeSens(Slider slider) {
+        if(inputManager.sensX != null && inputManager.sensY != null)
         if(slider.name =="SensX Slider") {
             GameManager.instance.inputManager.sensX = slider.value;
         } else if(slider.name == "SensY Slider") {

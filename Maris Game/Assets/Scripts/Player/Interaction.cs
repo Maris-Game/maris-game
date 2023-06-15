@@ -31,18 +31,18 @@ public class Interaction : MonoBehaviour
 
         if(interactable != null) {
             if(interactable.interactSort[interactable.arrayIndex] == "Collectible") {
-                collectibleText.text = "Press Q to interact";
+                collectibleText.text = "Press " + GameManager.instance.inputManager.interactKey.ToString() + " to interact";
                 collectibleText.gameObject.SetActive(true);
             } else if(interactable.interactSort[interactable.arrayIndex] == "Bomb") {
                 if(GameManager.instance.canMakeBomb) {
-                    bombText.text = "Press Q to make bomb";
+                    bombText.text = "Press " + GameManager.instance.inputManager.interactKey.ToString() + " to make bomb";
                 } else {
                     bombText.text = "Still need " + (3 - GameManager.instance.collectiblesCollected) + " objects";
                 }
                 bombText.gameObject.SetActive(true);
             }
                 
-            if(Input.GetKeyDown(KeyCode.Q)) {
+            if(Input.GetKeyDown(GameManager.instance.inputManager.interactKey)) {
                 if(interactable.interactSort[interactable.arrayIndex] == "Collectible") {
                     Debug.Log("Collected");
                     interactable.Interacted();
