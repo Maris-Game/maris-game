@@ -169,7 +169,7 @@ MonoBehaviour:
     spatialBlend: 0
     loop: 0
     source: {fileID: 0}
-  - name: kapje1
+  - name: Kapje1
     clip: {fileID: 8300000, guid: ee6747b02a16abb45a5bf48156a82256, type: 3}
     volume: 1
     pitch: 1
@@ -197,7 +197,7 @@ MonoBehaviour:
     spatialBlend: 0
     loop: 0
     source: {fileID: 0}
-  - name: Kapje
+  - name: Kapje2
     clip: {fileID: 8300000, guid: ee6747b02a16abb45a5bf48156a82256, type: 3}
     volume: 1
     pitch: 1

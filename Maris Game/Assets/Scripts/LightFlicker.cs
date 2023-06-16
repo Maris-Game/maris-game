@@ -14,6 +14,8 @@ public class LightFlicker : MonoBehaviour
 	public float[] maxWaitTimes = {3f, 2f, 1f, 0.5f};
 	public bool flash;
 	public bool playingSound;
+	public Material lightOnMat;
+	public Material lightOfMat;
 	private int collected;
 	
 	void Start () {
@@ -57,7 +59,13 @@ public class LightFlicker : MonoBehaviour
 
 			if(collected != GameManager.instance.collectiblesCollected) {
 				audioSource.Stop();
-		}	
+			}	
+		}
+
+		if(light.enabled) {
+			if(this.gameObject.renderer.material == lightOfMat) {
+				this.gameObject.renderer.material = lightOnMat;
+			}
 		}
 		
 	}
