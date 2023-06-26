@@ -5,14 +5,14 @@ using UnityEngine;
 public class HearingPlayer : MonoBehaviour
 {
     private AIController aiController;
-    private PlayerMovement player;
+    private Player player;
     public bool playedSound = false;
     private bool curKapje;
     private bool curJas;
     private bool rotate;
 
     private void Awake() {
-        player = FindObjectOfType<PlayerMovement>();
+        player = FindObjectOfType<Player>();
         aiController = this.transform.parent.GetComponent<AIController>();
     }
 
@@ -27,6 +27,9 @@ public class HearingPlayer : MonoBehaviour
                     playedSound = true;
                     aiController.PlayRandomSound();
                 }
+            } else if(!playedSound && aiController.inSight) {
+                playedSound = true;
+                aiController.PlayRandomSound();
             }
             if(rotate) {
                 aiController.RotateToPlayer();
@@ -37,11 +40,9 @@ public class HearingPlayer : MonoBehaviour
     //if the player enters the sphere collider (AKA hearing range) rotate the AI towards the player
     private void OnTriggerEnter(Collider other) {
         if(other.gameObject.tag == "Player") {
-
             aiController.hearingPlayer = true;
             curKapje = player.kledingScript.mondkapjeOp;
             curJas = player.kledingScript.jasAan;
-
             if(aiController.inSight && !aiController.playedSound) {
                 aiController.PlayRandomSound();
                 aiController.playedSound = true;

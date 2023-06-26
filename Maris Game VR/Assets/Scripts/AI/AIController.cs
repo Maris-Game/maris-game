@@ -57,14 +57,14 @@ public class AIController : MonoBehaviour
 
     private void Update() {
         
-        rayStartPos = new Vector3(transform.position.x, transform.position.y + yOffset, transform.position.z);
+        rayStartPos = new Vector3(transform.position.x, 0, transform.position.z);
         rayDirection = player.transform.position - this.transform.position;
 
         RaycastHit hitInfo;
         
         //if the player is in the fov of the AI turn towards the player
         if(Vector3.Angle(rayDirection, transform.forward) < fov / 2) {
-            if(Physics.Raycast (transform.position, rayDirection, out hitInfo, visionDistance)) {
+            if(Physics.Raycast (rayStartPos, rayDirection, out hitInfo, visionDistance)) {
                 if(hitInfo.transform.tag == "Player") {
                     if(GameManager.instance.collectiblesCollected == 0) {
                         chasing = false;
@@ -132,7 +132,6 @@ public class AIController : MonoBehaviour
                 AudioClip clip = GameManager.instance.audioManager.FindClip("Walking");
                 this.walkingAudio.clip = clip;
                 this.walkingAudio.Play();
-                Debug.Log("Play Walking Sound");
             }
             
         } else if(!walking) {

@@ -70,7 +70,6 @@ public class PlayerMovement : MonoBehaviour
         } else{
             sprinting = false;
         }
-        controller.Move(move * speed * Time.deltaTime);
 
 
         if(walking && !sprinting) {
@@ -82,7 +81,6 @@ public class PlayerMovement : MonoBehaviour
                 AudioClip clip = GameManager.instance.audioManager.FindClip("Walking");
                 this.audioSource.clip = clip;
                 this.audioSource.Play();
-                Debug.Log("Play Walking Sound");
             }
             
         } else if(!walking) {
@@ -100,17 +98,5 @@ public class PlayerMovement : MonoBehaviour
             }
         }
         
-    }
-
-    private void FixedUpdate() {
-        grounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
-
-        if(grounded && velocity.y < 0) {
-            velocity.y = 0f;
-        }
-
-        velocity.y += gravity * Time.deltaTime;
-
-        controller.Move(velocity);
     }
 }

@@ -6,7 +6,7 @@ using UnityEngine.Audio;
 public class LightFlicker : MonoBehaviour
 {
 	public AudioSource audioSource;
-	public Light light;
+	public Light curLight;
 	public float minWaitTime = 0.1f;
 	public float maxWaitTime = 0.5f;
 
@@ -20,7 +20,7 @@ public class LightFlicker : MonoBehaviour
 	
 	void Start () {
 		audioSource = GetComponent<AudioSource>();
-		light = GetComponent<Light>();
+		curLight = GetComponent<Light>();
 		StartCoroutine(Flashing());
 	}
 	
@@ -63,11 +63,11 @@ public class LightFlicker : MonoBehaviour
 		}
 
 		Renderer renderer = this.GetComponentInParent<Renderer>();
-		if(light.enabled) {
+		if(curLight.enabled) {
 			if(renderer.material == lightOfMat) {
 				renderer.material = lightOnMat;
 			}
-		} else if(!light.enabled) {
+		} else if(!curLight.enabled) {
 			if(renderer.material == lightOnMat) {
 				renderer.material = lightOfMat;
 			}
@@ -79,7 +79,7 @@ public class LightFlicker : MonoBehaviour
 		while (true)
 		{
 			yield return new WaitForSeconds(Random.Range(minWaitTime,maxWaitTime));
-			light.enabled = ! light.enabled;
+			curLight.enabled = ! curLight.enabled;
 		}
 	}
 }

@@ -5,18 +5,19 @@ TagManager:
   serializedVersion: 2
   tags:
   - AI
+  - Mondkapje
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Hand
   - Water
   - UI
   - Ground
   - Player
   - AI
-  - 
-  - 
+  - Mondkapje
+  - KledingCheck
   - 
   - 
   - 
