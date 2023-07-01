@@ -28,6 +28,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 116.39591, y: 148.19215, z: 27.480875}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5589182085795956739}
   m_Father: {fileID: 0}
@@ -50,7 +51,7 @@ MonoBehaviour:
   loadBar: {fileID: 0}
   localManager: {fileID: 0}
   inputManager: {fileID: 2414105340757899717}
-  audioManager: {fileID: 0}
+  audioManager: {fileID: 3531631061560795840}
   dataManager: {fileID: 0}
   collectibleIDs:
   - 8991d118-4847-4dac-b373-9ec53a878755
@@ -124,6 +125,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2414105340757899722}
   m_RootOrder: 0
@@ -140,9 +142,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bc16480ce5855534f9ed080a31909dac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  subtitles: 1
+  english: 1
+  dutch: 0
   sounds:
   - name: Laugh
     clip: {fileID: 8300000, guid: 2204f1d9ad725464dbcc294a52a72b6c, type: 3}
+    subtitleEnglish: {fileID: 0}
+    subtitleDutch: {fileID: 0}
     volume: 0.8
     pitch: 1
     spatialBlend: 0
@@ -150,6 +157,8 @@ MonoBehaviour:
     source: {fileID: 0}
   - name: Ambience
     clip: {fileID: 8300000, guid: 8fd51fd15f48ca94abfc13f52f558085, type: 3}
+    subtitleEnglish: {fileID: 0}
+    subtitleDutch: {fileID: 0}
     volume: 1
     pitch: 1
     spatialBlend: 0
@@ -157,6 +166,8 @@ MonoBehaviour:
     source: {fileID: 0}
   - name: Groet1.1
     clip: {fileID: 8300000, guid: 3ca4035ec7caf3245a717b509ad15e8b, type: 3}
+    subtitleEnglish: {fileID: 11400000, guid: d05140189d0e2514da2501f5ade7701e, type: 2}
+    subtitleDutch: {fileID: 11400000, guid: 9fa463bb7d848e84084b693d3b53b695, type: 2}
     volume: 1
     pitch: 1
     spatialBlend: 0
@@ -164,6 +175,8 @@ MonoBehaviour:
     source: {fileID: 0}
   - name: Groet1.2
     clip: {fileID: 8300000, guid: a9c0ad1bcf4aa314c9bb2528d0b9f0af, type: 3}
+    subtitleEnglish: {fileID: 11400000, guid: a3d6602236c549b4787f82ee755803bc, type: 2}
+    subtitleDutch: {fileID: 11400000, guid: 001b7ed2d625fb7419dafbba68b57258, type: 2}
     volume: 1
     pitch: 1
     spatialBlend: 0
@@ -171,6 +184,8 @@ MonoBehaviour:
     source: {fileID: 0}
   - name: Kapje1
     clip: {fileID: 8300000, guid: ee6747b02a16abb45a5bf48156a82256, type: 3}
+    subtitleEnglish: {fileID: 11400000, guid: cdca7d29ce4421148b0213f34bad7151, type: 2}
+    subtitleDutch: {fileID: 11400000, guid: aec50f88a9c1c854087b1a4ca18626b5, type: 2}
     volume: 1
     pitch: 1
     spatialBlend: 0
@@ -178,6 +193,8 @@ MonoBehaviour:
     source: {fileID: 0}
   - name: jas1
     clip: {fileID: 8300000, guid: a541d8792c73a094e953e2da2e4009c8, type: 3}
+    subtitleEnglish: {fileID: 11400000, guid: 41052aa0365baa44793d3234de39982c, type: 2}
+    subtitleDutch: {fileID: 11400000, guid: 36302ac63dc3fbd4e9beadbce62462ea, type: 2}
     volume: 1
     pitch: 1
     spatialBlend: 0
@@ -185,6 +202,8 @@ MonoBehaviour:
     source: {fileID: 0}
   - name: Boos1
     clip: {fileID: 8300000, guid: 8f2e6f61f1ce6414fb7817185231d532, type: 3}
+    subtitleEnglish: {fileID: 11400000, guid: 3b18657363f98b84cae1eed268fec5d5, type: 2}
+    subtitleDutch: {fileID: 11400000, guid: 8ed430a09cf90ac41983ecd1842ff99b, type: 2}
     volume: 1
     pitch: 1
     spatialBlend: 0
@@ -192,6 +211,8 @@ MonoBehaviour:
     source: {fileID: 0}
   - name: Groet2
     clip: {fileID: 8300000, guid: 7fb0dfee02113a84bb998f53fc14d2bf, type: 3}
+    subtitleEnglish: {fileID: 11400000, guid: 8d135ad73c2eb9a4c91ad63c80f3797d, type: 2}
+    subtitleDutch: {fileID: 11400000, guid: e31a951d294d57044a0f916f55a7d0cc, type: 2}
     volume: 1
     pitch: 1
     spatialBlend: 0
@@ -199,6 +220,8 @@ MonoBehaviour:
     source: {fileID: 0}
   - name: Kapje2
     clip: {fileID: 8300000, guid: ee6747b02a16abb45a5bf48156a82256, type: 3}
+    subtitleEnglish: {fileID: 11400000, guid: ab8a2f2bd4877de4690fa36e70157212, type: 2}
+    subtitleDutch: {fileID: 11400000, guid: 72838b610c8725f4195a9fe783b0dc30, type: 2}
     volume: 1
     pitch: 1
     spatialBlend: 0
@@ -206,6 +229,8 @@ MonoBehaviour:
     source: {fileID: 0}
   - name: Jas2
     clip: {fileID: 8300000, guid: a541d8792c73a094e953e2da2e4009c8, type: 3}
+    subtitleEnglish: {fileID: 11400000, guid: e77c6a962b156ae41868a9801943c66e, type: 2}
+    subtitleDutch: {fileID: 11400000, guid: 816c5e465995a4a48b208640fcdc4063, type: 2}
     volume: 1
     pitch: 1
     spatialBlend: 0
@@ -213,6 +238,8 @@ MonoBehaviour:
     source: {fileID: 0}
   - name: Boos2
     clip: {fileID: 8300000, guid: 4779d599f72dac94fbeaaa3e5fd2de24, type: 3}
+    subtitleEnglish: {fileID: 11400000, guid: 642e61fee57fdf646910dabd7f7a4839, type: 2}
+    subtitleDutch: {fileID: 11400000, guid: bf203693fc88bcc43a9b73bce4b35746, type: 2}
     volume: 1
     pitch: 1
     spatialBlend: 0
@@ -220,6 +247,8 @@ MonoBehaviour:
     source: {fileID: 0}
   - name: Groet3
     clip: {fileID: 8300000, guid: cb7b57a91c1ae684f9b0894c73215b09, type: 3}
+    subtitleEnglish: {fileID: 11400000, guid: bd7d1ab80562fde49bdb578bf5b7cb2f, type: 2}
+    subtitleDutch: {fileID: 11400000, guid: 6ee75d0e664bb5940b4f56e2875eaef8, type: 2}
     volume: 1
     pitch: 1
     spatialBlend: 0
@@ -227,6 +256,8 @@ MonoBehaviour:
     source: {fileID: 0}
   - name: Kapje3
     clip: {fileID: 8300000, guid: 4d8096df8f88a27459bbebecb9cd610a, type: 3}
+    subtitleEnglish: {fileID: 11400000, guid: a0a38810860aba2499a41ee4e2ffa888, type: 2}
+    subtitleDutch: {fileID: 11400000, guid: 009eaab92da773c49a08c5b64c21e4bf, type: 2}
     volume: 1
     pitch: 1
     spatialBlend: 0
@@ -234,6 +265,8 @@ MonoBehaviour:
     source: {fileID: 0}
   - name: Jas3
     clip: {fileID: 8300000, guid: 14fe0fa0a5a35d247a22065a8c0ac40c, type: 3}
+    subtitleEnglish: {fileID: 11400000, guid: 1374db8bf15960444a5d73d38a315676, type: 2}
+    subtitleDutch: {fileID: 11400000, guid: dcd48f15b48d2d444b8e923eddde0bdb, type: 2}
     volume: 1
     pitch: 1
     spatialBlend: 0
@@ -241,6 +274,8 @@ MonoBehaviour:
     source: {fileID: 0}
   - name: Boos3
     clip: {fileID: 8300000, guid: 4427c2d7ef2109c4fb86955db1731796, type: 3}
+    subtitleEnglish: {fileID: 11400000, guid: a50a3e241decc3141910e4f63538364a, type: 2}
+    subtitleDutch: {fileID: 11400000, guid: 1a7098d60c9a9bc46ab9b2ddbb97ef84, type: 2}
     volume: 1
     pitch: 1
     spatialBlend: 0
@@ -248,6 +283,8 @@ MonoBehaviour:
     source: {fileID: 0}
   - name: Lights1
     clip: {fileID: 8300000, guid: 47463db05ade604439ab1869e4752d5b, type: 3}
+    subtitleEnglish: {fileID: 0}
+    subtitleDutch: {fileID: 0}
     volume: 1
     pitch: 1
     spatialBlend: 0
@@ -255,6 +292,8 @@ MonoBehaviour:
     source: {fileID: 0}
   - name: Lights2
     clip: {fileID: 8300000, guid: bbcc950f020922f408f050b072d2cc88, type: 3}
+    subtitleEnglish: {fileID: 0}
+    subtitleDutch: {fileID: 0}
     volume: 1
     pitch: 1
     spatialBlend: 0
@@ -262,6 +301,8 @@ MonoBehaviour:
     source: {fileID: 0}
   - name: Lights3
     clip: {fileID: 8300000, guid: 08d9d10d702ae704e91d3f5edc28c9c4, type: 3}
+    subtitleEnglish: {fileID: 0}
+    subtitleDutch: {fileID: 0}
     volume: 1
     pitch: 1
     spatialBlend: 0
@@ -269,6 +310,8 @@ MonoBehaviour:
     source: {fileID: 0}
   - name: Lights4
     clip: {fileID: 8300000, guid: b69165bf55dc6164ca6120c797de4eb6, type: 3}
+    subtitleEnglish: {fileID: 0}
+    subtitleDutch: {fileID: 0}
     volume: 1
     pitch: 1
     spatialBlend: 0
@@ -276,6 +319,8 @@ MonoBehaviour:
     source: {fileID: 0}
   - name: Walking
     clip: {fileID: 8300000, guid: 2e4a73dcfa9780a409a6d60f41294332, type: 3}
+    subtitleEnglish: {fileID: 0}
+    subtitleDutch: {fileID: 0}
     volume: 1
     pitch: 1
     spatialBlend: 1
@@ -283,6 +328,8 @@ MonoBehaviour:
     source: {fileID: 0}
   - name: Sprinting
     clip: {fileID: 8300000, guid: 6bad6a83b27107e47998a5a041151919, type: 3}
+    subtitleEnglish: {fileID: 0}
+    subtitleDutch: {fileID: 0}
     volume: 1
     pitch: 1
     spatialBlend: 1
@@ -290,6 +337,8 @@ MonoBehaviour:
     source: {fileID: 0}
   - name: Item Collected
     clip: {fileID: 8300000, guid: 21ce1b8517df548428a272747a29f9f7, type: 3}
+    subtitleEnglish: {fileID: 0}
+    subtitleDutch: {fileID: 0}
     volume: 0.2
     pitch: 1
     spatialBlend: 0
@@ -297,6 +346,8 @@ MonoBehaviour:
     source: {fileID: 0}
   - name: ClothesOn
     clip: {fileID: 8300000, guid: e79ad0720da23074c9db6d6afc4358d1, type: 3}
+    subtitleEnglish: {fileID: 0}
+    subtitleDutch: {fileID: 0}
     volume: 0.2
     pitch: 1
     spatialBlend: 0

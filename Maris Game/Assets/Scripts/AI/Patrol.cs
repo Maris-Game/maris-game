@@ -63,25 +63,23 @@ public class Patrol : MonoBehaviour
     public void DoLokaalPatrol() {
         if(inLokaal33) {
             
-            int stayInLokaal = Mathf.RoundToInt(Random.Range(0, chanceOutOfLokaal));
-            
-            if(stayInLokaal < (chanceOutOfLokaal / 2)) {
-                if(!destPointSet) {
+            if(!destPointSet) {
+                int stayInLokaal = Mathf.RoundToInt(Random.Range(0, chanceOutOfLokaal));
+                if(stayInLokaal < (chanceOutOfLokaal / 2)) {
                     wayPointNum = Random.Range(0, waypointsLokaal33.Length);
                     target = waypointsLokaal33[wayPointNum].position;
+                } else { target = waypointOutLokaal33.position; }
                 if(Vector3.Distance(transform.position, target) > checkRange) {
                     destPointSet = true;
                     AIcontroller.walking = true;
                 }
-                } else { 
-                    agent.SetDestination(target); 
-                    if(Vector3.Distance(transform.position, target) < checkRange) { 
-                        destPointSet = false; 
-                        AIcontroller.walking = false;
-                    }
+                
+            } else { 
+                agent.SetDestination(target); 
+                if(Vector3.Distance(transform.position, target) < checkRange) { 
+                    destPointSet = false; 
+                    AIcontroller.walking = false;
                 }
-            } else {
-                agent.SetDestination(waypointOutLokaal33.position); 
             }
        
         } else if(inLokaal30) {

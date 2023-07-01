@@ -22,12 +22,25 @@ public class PlayerMovement : MonoBehaviour
     private bool grounded;
     public bool walking = false;
     public bool sprinting = false;
+    public bool canMove = true;
     
     private InputManager inputManager;
     private GameManager gameManager;
+    private CapsuleCollider cc;
     public Kleding kledingScript;
+    public Camera cam;
+
+    [Header("Win Animation")]
+    public Vector3 winPosition;
+    public Quaternion winRotation;
+    public float zoomSpeed;
+    public float rotateSpeed;
+    public float moveSpeed;
+    public float duration;
+    public bool won = false;
 
     private void Start() {
+        cc = GetComponent<CapsuleCollider>();
         audioSource = GetComponent<AudioSource>();
         kledingScript = GetComponent<Kleding>();
         gameManager = GameManager.instance;
@@ -35,42 +48,45 @@ public class PlayerMovement : MonoBehaviour
     }
 
     private void Update() {
-        float x = 0f;
-        float z = 0f;
-        //Vertical Inputs
-        if(Input.GetKey(inputManager.forwardKey)) {
-            z = 1f;
-            walking = true;
-        } else if(Input.GetKey(inputManager.backwardKey)) {
-            z = -1f;
-            walking = true;
-        } else {
-            walking = false;
-        }
-        //Horizontal Inputs
-        if(Input.GetKey(inputManager.rightKey)) {
-            x = 1f;
-            walking = true;
-        }
-        else if(Input.GetKey(inputManager.leftKey)) {
-            x = -1f;
-            walking = true;
-        } else {
-            walking = false;
-        }
-        Vector3 move = transform.right * x + transform.forward * z;
 
-        if(Input.GetKey(inputManager.sprintKey)) {
-            if(!kledingScript.mondkapjeOp) {
-                sprinting = true;
-                move *= sprintMultiplier;
+        if(canMove) {
+            float x = 0f;
+            float z = 0f;
+            //Vertical Inputs
+            if(Input.GetKey(inputManager.forwardKey)) {
+                z = 1f;
+                walking = true;
+            } else if(Input.GetKey(inputManager.backwardKey)) {
+                z = -1f;
+                walking = true;
+            } else {
+                walking = false;
+            }
+            //Horizontal Inputs
+            if(Input.GetKey(inputManager.rightKey)) {
+                x = 1f;
+                walking = true;
+            }
+            else if(Input.GetKey(inputManager.leftKey)) {
+                x = -1f;
+                walking = true;
+            } else {
+                walking = false;
+            }
+            Vector3 move = transform.right * x + transform.forward * z;
+
+            if(Input.GetKey(inputManager.sprintKey)) {
+                if(!kledingScript.mondkapjeOp) {
+                    sprinting = true;
+                    move *= sprintMultiplier;
+                } else{
+                    sprinting = false;
+                }  
             } else{
                 sprinting = false;
-            }  
-        } else{
-            sprinting = false;
+            }
+            controller.Move(move * speed * Time.deltaTime);
         }
-        controller.Move(move * speed * Time.deltaTime);
 
 
         if(walking && !sprinting) {
@@ -99,7 +115,33 @@ public class PlayerMovement : MonoBehaviour
                 this.audioSource.Play();
             }
         }
+
+        if(won) {
+            if(transform.position == winPosition && transform.rotation == winRotation && cam.fieldOfView == 39.6f) {
+                GameManager.instance.Win();
+            }
+        }
+
         
+    }
+
+    IEnumerator Win() {
+        cc.enabled = false;
+        controller.enabled = false;
+        won = true;
+        canMove = false;
+        Vector3 orgPos = transform.position;
+        Quaternion orgRot = transform.rotation;
+        float dur = Vector3.Distance(transform.position, winPosition) / duration; 
+        float time = 0;
+        
+        while (time < duration) {
+            time += Time.deltaTime;
+            this.transform.position = Vector3.MoveTowards(transform.position, winPosition, moveSpeed * Time.deltaTime);
+            this.transform.rotation = Quaternion.RotateTowards(transform.rotation, winRotation, rotateSpeed * Time.deltaTime);
+            cam.fieldOfView = Mathf.MoveTowards(cam.fieldOfView, 39.6f, zoomSpeed * Time.deltaTime);
+            yield return null;
+        }
     }
 
     private void FixedUpdate() {

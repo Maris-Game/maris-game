@@ -9,6 +9,7 @@ public class MouseLook : MonoBehaviour
     private float xRot;
     private InputManager inputManager;
     private GameManager gameManager;
+    public bool canMove = true;
 
 
     private void Start() {
@@ -18,6 +19,10 @@ public class MouseLook : MonoBehaviour
     }
 
     private void Update() {
+        if(!canMove) {
+            return;
+        }
+
         float mouseX = Input.GetAxis("Mouse X") * inputManager.sensX * Time.deltaTime;
         float mouseY = Input.GetAxis("Mouse Y") * inputManager.sensY * Time.deltaTime;
 
@@ -31,5 +36,10 @@ public class MouseLook : MonoBehaviour
 
         transform.localRotation = Quaternion.Euler(xRot, 0f, 0f);
         playerBody.Rotate(Vector3.up * mouseX);
+    }
+
+    public void Win() {
+        canMove = false;
+        transform.localRotation = Quaternion.Euler(0f, 0f, 0f);
     }
 }

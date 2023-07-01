@@ -6,6 +6,8 @@ public class Sound {
     
     public string name;
     public AudioClip clip;
+    public SubtitleObject subtitleEnglish;
+    public SubtitleObject subtitleDutch;
 
     [Range(0f, 1f)]
     public float volume;

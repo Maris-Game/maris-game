@@ -6,7 +6,6 @@ public class HearingPlayer : MonoBehaviour
 {
     private AIController aiController;
     private PlayerMovement player;
-    public bool playedSound = false;
     private bool curKapje;
     private bool curJas;
     private bool rotate;
@@ -23,8 +22,8 @@ public class HearingPlayer : MonoBehaviour
                 curKapje = player.kledingScript.mondkapjeOp;
                 curJas = player.kledingScript.jasAan;
                 
-                if(!playedSound && aiController.inSight) {
-                    playedSound = true;
+                if(!aiController.playedSound && aiController.inSight) {
+                    aiController.playedSound = true;
                     aiController.PlayRandomSound();
                 }
             }

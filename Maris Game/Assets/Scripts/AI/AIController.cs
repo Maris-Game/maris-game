@@ -15,6 +15,7 @@ public class AIController : MonoBehaviour
     private NavMeshAgent agent;
     private SphereCollider sc;
     private Patrol patrol;
+    public Subtitles subtitles;
 
     public bool chase;
     public bool chasing;
@@ -165,75 +166,48 @@ public class AIController : MonoBehaviour
         if(audioSource.isPlaying) {
             return;
         }
-
+        string curName = "";
         Debug.Log("PLay Random Sound");
         int randomNum = Mathf.RoundToInt(Random.Range(0f, 1f));
         int collected = GameManager.instance.collectiblesCollected;
         AudioManager audioManager = GameManager.instance.audioManager;
 
         if(collected == 0) {
-            
             int index = Mathf.RoundToInt(Random.Range(0f, 1f));
-            string curName = normalSounds[index];
-            AudioClip clip = audioManager.FindClip(curName);
-            this.audioSource.clip = clip;
-            this.audioSource.Play();
-
+            curName = normalSounds[index];    
         }
         
         else if(collected == 1) {
-            if(!kledingScript.mondkapjeOp && randomNum == 1) {
-                
-                string curName = kapjeSounds[0];
-                AudioClip clip = audioManager.FindClip(curName);
-                this.audioSource.clip = clip;   
-
+            if(!kledingScript.mondkapjeOp && randomNum == 1) {   
+                curName = kapjeSounds[0]; 
             } else if(kledingScript.jasAan && randomNum == 1) {
-
-                string curName = jasSounds[0];
-                AudioClip clip = audioManager.FindClip(curName);
-                this.audioSource.clip = clip;
-
+                curName = jasSounds[0];
             } else {
-                
-                string curName = normalSounds[2];
-                AudioClip clip = audioManager.FindClip(curName);
-                this.audioSource.clip = clip;
+                curName = normalSounds[2];
             }
-
-            this.audioSource.Play();
         } 
         
         else if(collected == 2) {
             if(!kledingScript.mondkapjeOp && randomNum == 1) {
-
-                string curName = kapjeSounds[1];
-                AudioClip clip = audioManager.FindClip(curName);
-                this.audioSource.clip = clip;
-
+                curName = kapjeSounds[1];
             } else if(kledingScript.jasAan && randomNum == 1) {
-
-                string curName = jasSounds[1];
-                AudioClip clip = audioManager.FindClip(curName);
-                this.audioSource.clip = clip;
-
+                curName = jasSounds[1];
             } else {
-
-                string curName = normalSounds[3];
-                AudioClip clip = audioManager.FindClip(curName);
-                this.audioSource.clip = clip;
-
+                curName = normalSounds[3];
             }
-
-            this.audioSource.Play();
         } 
         
         else if(collected >= 3) {
             int index = Mathf.RoundToInt(Random.Range(0f, 2f));
-            string curName = angrySounds[index];
-            AudioClip clip = audioManager.FindClip(curName);
-            this.audioSource.clip = clip;
-            this.audioSource.Play();
+            curName = angrySounds[index];
+        }
+
+        AudioClip clip = audioManager.FindClip(curName);
+        SubtitleObject subtitle = audioManager.FindSubtitle(curName);
+        this.audioSource.clip = clip;
+        this.audioSource.Play();
+        if(subtitle != null) {
+            subtitles.SetSubtitle(subtitle.subtitle);
         }
     }
 }

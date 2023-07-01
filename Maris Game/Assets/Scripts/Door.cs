@@ -4,15 +4,14 @@ using UnityEngine;
 
 public class Door : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public bool canOpen;
+    public bool opened;
 
-    // Update is called once per frame
-    void Update()
-    {
+    public void Interacted() {
+        if(!canOpen) {
+            return;
+        }
+
         
     }
 }

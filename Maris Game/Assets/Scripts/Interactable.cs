@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Interactable : MonoBehaviour, IDataPersistence
 {
-    public string[] interactSort = new string[] {"Collectible", "Bomb"};
+    public string[] interactSort = new string[] {"Collectible", "Bomb", "Door"};
     public Transform[] spawnPoints;
     public int arrayIndex = 0;
     public string collectibleName;
@@ -12,6 +12,7 @@ public class Interactable : MonoBehaviour, IDataPersistence
     public bool canOpen = false;
     
     public string collectibleID;
+
     [ContextMenu("Generate ID for collectible")]
     private void GenerateGuid() {
         collectibleID = System.Guid.NewGuid().ToString();
@@ -19,7 +20,7 @@ public class Interactable : MonoBehaviour, IDataPersistence
 
     private void Awake() {
         if(this.interactSort[arrayIndex] == "Collectible" && collectibleName != "secret") {
-            int index = Mathf.RoundToInt(Random.Range(0f, spawnPoints.Length));
+            int index = Mathf.RoundToInt(Random.Range(0f, spawnPoints.Length - 1));
             Debug.Log(index);
             this.transform.position = spawnPoints[index].position;
             this.transform.rotation = spawnPoints[index].rotation;
@@ -63,6 +64,8 @@ public class Interactable : MonoBehaviour, IDataPersistence
                 }
             }
             
+        } else if(this.interactSort[arrayIndex] == "Door") {
+            this.GetComponent<Door>().Interacted();
         }
     }
 

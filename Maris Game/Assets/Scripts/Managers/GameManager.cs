@@ -7,7 +7,6 @@ using UnityEngine.Video;
 
 public class GameManager : MonoBehaviour, IDataPersistence
 {
-    
     public bool paused;
 
     public VideoPlayer vp;
@@ -113,14 +112,26 @@ public class GameManager : MonoBehaviour, IDataPersistence
     }
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode) {
+        audioManager.OnSceneLoaded();
         vp = FindObjectOfType<VideoPlayer>();
         if(vp != null) {
             vp.loopPointReached += VideoFinished;
         }
 
         if(SceneManager.GetActiveScene().name == "Loading Screen") {
-            loadBar = FindObjectOfType<Slider>();
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        }
+
+        if(SceneManager.GetActiveScene().name == "Intro") {
+            GameObject englishSub = GameObject.Find("English Subtitles");
+            GameObject dutchSub = GameObject.Find("Dutch Subtitles");
+            if(audioManager.english && !audioManager.dutch) {
+                englishSub.SetActive(true);
+                dutchSub.SetActive(false);
+            } else if(audioManager.subtitles && !audioManager.english && audioManager.dutch) {
+                englishSub.SetActive(false);
+                dutchSub.SetActive(true);
+            }
         }
 
         if(SceneManager.GetActiveScene().name == "Maris") {

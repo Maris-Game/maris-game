@@ -17,12 +17,11 @@ public class PauseMenu : MonoBehaviour
         pauseMenuUI = GameObject.Find("Pause Menu");
         pauseMenuUI.SetActive(false);
         gameManager = GameManager.instance;
-        inputManager = GameManager.instance.inputManager;
         settingsMenu = FindObjectOfType<SettingsMenu>();
     }
 
     private void Update() {
-        if(Input.GetKeyDown(inputManager.pauseKey)) {
+        if(Input.GetKeyDown(GameManager.instance.inputManager.pauseKey)) {
             Pause();
         }
     }
@@ -40,11 +39,6 @@ public class PauseMenu : MonoBehaviour
             Cursor.lockState = CursorLockMode.Locked;
             pauseMenuUI.SetActive(false);
         }
-    }
-
-    public void ChangeSens(Slider slider) {
-        settingsMenu.ChangeSens(slider);
-        settingsMenu.GetText(curText);
     }
 
     public void GetText(TextMeshProUGUI text) {
