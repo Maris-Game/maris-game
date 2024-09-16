@@ -7,8 +7,6 @@ using UnityEngine.SceneManagement;
 public class AudioManager : MonoBehaviour, IDataPersistence
 {
     public bool subtitles = false;
-    public bool english = true;
-    public bool dutch = false;
     public Sound[] sounds;
 
     private void Awake() {
@@ -20,6 +18,9 @@ public class AudioManager : MonoBehaviour, IDataPersistence
             s.source.loop = s.loop;
             s.source.spatialBlend = s.spatialBlend;
         }
+    }
+
+    private void Update() {
     }
 
     public void PlaySound(string name) {
@@ -45,9 +46,9 @@ public class AudioManager : MonoBehaviour, IDataPersistence
         Sound s = Array.Find(sounds, sound => sound.name == name);
         if(s != null) {
 
-            if(english) {
+            if(GameManager.instance.language == "English") {
                 return s.subtitleEnglish;
-            } else if(dutch) {
+            } else if(GameManager.instance.language == "Nederlands") {
                 return s.subtitleDutch;
             } else {
                 return null;
@@ -65,8 +66,6 @@ public class AudioManager : MonoBehaviour, IDataPersistence
 
     public void LoadData(GameData data) {
         subtitles = data.subtitles;
-        english = data.english;
-        dutch = data.dutch;
     }
 
     public void SaveData(ref GameData data) {

@@ -21,7 +21,6 @@ public class Interactable : MonoBehaviour, IDataPersistence
     private void Awake() {
         if(this.interactSort[arrayIndex] == "Collectible" && collectibleName != "secret") {
             int index = Mathf.RoundToInt(Random.Range(0f, spawnPoints.Length - 1));
-            Debug.Log(index);
             this.transform.position = spawnPoints[index].position;
             this.transform.rotation = spawnPoints[index].rotation;
         }
@@ -37,7 +36,6 @@ public class Interactable : MonoBehaviour, IDataPersistence
     public void LoadData(GameData data) {
         Debug.Log("Interactable Data Loaded)");
         data.collectiblesCollected.TryGetValue(this.collectibleID, out collected);
-        Debug.Log(collected);
     }
 
 

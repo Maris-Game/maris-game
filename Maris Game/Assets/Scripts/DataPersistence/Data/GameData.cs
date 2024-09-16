@@ -18,8 +18,8 @@ public class GameData
     public bool fullScreen;
     public bool vSync;
     public bool subtitles;
-    public bool english;
-    public bool dutch;
+    public int subtitleSize;
+    public string language;
 
     public GameData() {
         this.sensX = 100f;
@@ -30,8 +30,8 @@ public class GameData
 
         this.fullScreen = true;
         this.vSync = true;
-        this.subtitles = false;
-        this.english = true;
-        this.dutch = false;
+        this.subtitles = true;
+        this.subtitleSize = 60;
+        this.language = "English";
     }
 }

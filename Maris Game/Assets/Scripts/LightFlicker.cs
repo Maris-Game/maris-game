@@ -9,16 +9,18 @@ public class LightFlicker : MonoBehaviour
 	public Light curLight;
 	public float minWaitTime = 0.1f;
 	public float maxWaitTime = 0.5f;
-
+	public Material[] curMats;
 	public float[] minWaitTimes = {2f, 1f, 0.5f, 0.1f};
 	public float[] maxWaitTimes = {3f, 2f, 1f, 0.5f};
 	public bool flash;
 	public bool playingSound;
 	public Material lightOnMat;
 	public Material lightOfMat;
+	public Renderer renderer;
 	private int collected;
 	
 	void Start () {
+		renderer = GetComponentInParent<Renderer>();
 		audioSource = GetComponent<AudioSource>();
 		curLight = GetComponent<Light>();
 		StartCoroutine(Flashing());
@@ -62,14 +64,16 @@ public class LightFlicker : MonoBehaviour
 			}	
 		}
 
-		Renderer renderer = this.GetComponentInParent<Renderer>();
+		curMats = renderer.materials;
 		if(curLight.enabled) {
-			if(renderer.material == lightOfMat) {
-				renderer.material = lightOnMat;
+			if(renderer.materials[0] == lightOfMat) {
+				//curMats[0] = lightOnMat;
+				//renderer.materials = curMats;
 			}
 		} else if(!curLight.enabled) {
-			if(renderer.material == lightOnMat) {
-				renderer.material = lightOfMat;
+			if(renderer.materials[0] == lightOnMat) {
+				//curMats[0] = lightOfMat;
+				//renderer.materials = curMats;
 			}
 		}
 		

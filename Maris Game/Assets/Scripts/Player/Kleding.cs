@@ -6,8 +6,10 @@ public class Kleding : MonoBehaviour
 {
     public bool mondkapjeOp = false;
     public bool jasAan = false;
-    public bool jas = false;
-    public bool mondkapje = true;
+    public bool jasMode = false;
+    public bool mondkapjeMode = true;
+    public GameObject mondkapje;
+    public GameObject jas;
     public Animator anim;
     
     private GameManager gameManager;
@@ -24,37 +26,44 @@ public class Kleding : MonoBehaviour
         Jas();
 
         if(Input.GetKeyDown(inputManager.switchClothKey)) {
-            if(mondkapje) {
-                mondkapje = false;
-                jas = true;
+            if(mondkapjeMode) {
+                mondkapjeMode = false;
+                jasMode = true;
             } else {
-                mondkapje = true;
-                jas = false;
+                mondkapjeMode = true;
+                jasMode = false;
             }
         }
     }
 
     private void MondKapje() {
-        if(!mondkapje) {
+        if(!mondkapjeMode) {
             return;
         }
+
         if(Input.GetKeyDown(inputManager.clothesOnKey)) {
             GameManager.instance.audioManager.PlaySound("ClothesOn");
+            
             if(!mondkapjeOp) {
                 mondkapjeOp = true;
-                anim.Play("mondkapjeOp", 1);
+                mondkapje.transform.localPosition = new Vector3(0, -0.392f, 0.479f);
+                mondkapje.transform.localRotation = new Quaternion(17.506f, 0f, 0f, mondkapje.transform.localRotation.w);
             }
             else { 
                 mondkapjeOp = false;
-                anim.Play("mondkapjeAf", 1);
+                mondkapje.transform.localPosition = new Vector3(0, -0.697f, 0.485f);
+                mondkapje.transform.localRotation = new Quaternion(17.506f, 0f, 0f, mondkapje.transform.localRotation.w);
+                
             }
+            //StartCoroutine("mondkapjeToggle");
         }
     }
 
     private void Jas() {
-        if(!jas) {
+        if(!jasMode) {
             return;
         }
+
         if(Input.GetKeyDown(inputManager.clothesOnKey)) {
             GameManager.instance.audioManager.PlaySound("ClothesOn");
             if(!jasAan) {
@@ -63,9 +72,33 @@ public class Kleding : MonoBehaviour
             }
             else { 
                 jasAan = false;
-                anim.Play("JasAf", 2);
+                anim.Play("JasUit", 2);
             }
         }
+    }
+
+    IEnumerator mondkapjeToggle() {
+        Vector3 onPos = new Vector3(0, -0.392f, 0.479f);
+        Quaternion onRot = new Quaternion(0, 0, 0, mondkapje.transform.localRotation.w);
+        Vector3 offPos = new Vector3(0, -0.697f, 0.485f);
+        Quaternion offRot = new Quaternion(17.506f, 0f, 0f, mondkapje.transform.localRotation.w);
+
+        float time = 0;
+        float maxTime = 2f;
+        while (time < maxTime) {
+            if(!mondkapjeOp) {
+                mondkapje.transform.localPosition = Vector3.Lerp(offPos, onPos, time / maxTime);
+                mondkapje.transform.localRotation = Quaternion.Lerp(offRot, onRot, time / maxTime);    
+            } else {
+                mondkapje.transform.localPosition = Vector3.Lerp(onPos, offPos, time / maxTime);
+                mondkapje.transform.localRotation = Quaternion.Lerp(onRot, offRot, time / maxTime); 
+            }
+            time += Time.deltaTime;
+        }
+        if(!mondkapjeOp) {mondkapjeOp = true;}
+        else {mondkapjeOp = false;}
+
+        yield return null; 
     }
 
 

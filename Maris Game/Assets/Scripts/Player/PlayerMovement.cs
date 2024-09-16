@@ -28,7 +28,8 @@ public class PlayerMovement : MonoBehaviour
     private GameManager gameManager;
     private CapsuleCollider cc;
     public Kleding kledingScript;
-    public Camera cam;
+    public Camera mainCam;
+    public Camera sceneCam;
 
     [Header("Win Animation")]
     public Vector3 winPosition;
@@ -38,11 +39,11 @@ public class PlayerMovement : MonoBehaviour
     public float moveSpeed;
     public float duration;
     public bool won = false;
+    public bool gameOver = false;
 
     private void Start() {
         cc = GetComponent<CapsuleCollider>();
         audioSource = GetComponent<AudioSource>();
-        kledingScript = GetComponent<Kleding>();
         gameManager = GameManager.instance;
         inputManager = GameManager.instance.inputManager;
     }
@@ -117,7 +118,7 @@ public class PlayerMovement : MonoBehaviour
         }
 
         if(won) {
-            if(transform.position == winPosition && transform.rotation == winRotation && cam.fieldOfView == 39.6f) {
+            if(transform.position == winPosition && transform.rotation == winRotation && sceneCam.fieldOfView == 39.6f) {
                 GameManager.instance.Win();
             }
         }
@@ -139,9 +140,27 @@ public class PlayerMovement : MonoBehaviour
             time += Time.deltaTime;
             this.transform.position = Vector3.MoveTowards(transform.position, winPosition, moveSpeed * Time.deltaTime);
             this.transform.rotation = Quaternion.RotateTowards(transform.rotation, winRotation, rotateSpeed * Time.deltaTime);
-            cam.fieldOfView = Mathf.MoveTowards(cam.fieldOfView, 39.6f, zoomSpeed * Time.deltaTime);
+            sceneCam.fieldOfView = Mathf.MoveTowards(sceneCam.fieldOfView, 39.6f, zoomSpeed * Time.deltaTime);
             yield return null;
         }
+    }
+
+    IEnumerator GameOver() {
+        Vector3 orgPos = transform.position;
+        mainCam.GetComponent<MouseLook>().GameOver();
+        cc.enabled = false;
+        controller.enabled = false;
+        gameOver = true;
+        canMove = false;
+        float time = 0f;
+        float duration = 10f;
+
+        while (time < duration) {
+            time += Time.deltaTime;
+            this.transform.position = orgPos;
+            yield return null;
+        }
+
     }
 
     private void FixedUpdate() {

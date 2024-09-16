@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using UnityEngine.Video;
+using TMPro;
 
 public class GameManager : MonoBehaviour, IDataPersistence
 {
@@ -28,6 +29,13 @@ public class GameManager : MonoBehaviour, IDataPersistence
 
     [Header("Settings")]
     public bool fullScreen;
+    public bool vSync;
+    public Resolution curRes;
+    public bool subtitles;
+    public int subtitleSize;
+    public string language;
+  
+
 
     private void OnEnable () {
         SceneManager.sceneLoaded += OnSceneLoaded;
@@ -66,6 +74,10 @@ public class GameManager : MonoBehaviour, IDataPersistence
 
     public void LoadData(GameData data) {
         this.fullScreen = data.fullScreen;
+        this.vSync = data.vSync;
+        this.subtitles = data.subtitles;
+        this.subtitleSize = data.subtitleSize;
+        this.language = data.language;
 
         collectiblesCollected = 0;
         for(int i = 0; i < collectibleIDs.Length; i++) {
@@ -78,6 +90,11 @@ public class GameManager : MonoBehaviour, IDataPersistence
 
     public void SaveData(ref GameData data) {
         data.fullScreen = this.fullScreen;
+        data.vSync = this.vSync;
+        data.subtitles = this.subtitles;
+        data.subtitleSize = this.subtitleSize;
+        data.language = this.language;
+
 
         if(gameOver) {
             
@@ -123,12 +140,22 @@ public class GameManager : MonoBehaviour, IDataPersistence
         }
 
         if(SceneManager.GetActiveScene().name == "Intro") {
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+
+            //finds all texts & sets it to the chosen size
+            TextMeshProUGUI[] texts = FindObjectsOfType<TextMeshProUGUI>();
+            Debug.Log(texts.Length);
+            for(int i = 0; i < texts.Length; i++) {
+                texts[i].fontSize = subtitleSize;
+            }
+
             GameObject englishSub = GameObject.Find("English Subtitles");
             GameObject dutchSub = GameObject.Find("Dutch Subtitles");
-            if(audioManager.english && !audioManager.dutch) {
+            if(language == "English") {
                 englishSub.SetActive(true);
                 dutchSub.SetActive(false);
-            } else if(audioManager.subtitles && !audioManager.english && audioManager.dutch) {
+            } else if(language == "Nederlands") {
                 englishSub.SetActive(false);
                 dutchSub.SetActive(true);
             }
@@ -136,6 +163,33 @@ public class GameManager : MonoBehaviour, IDataPersistence
 
         if(SceneManager.GetActiveScene().name == "Maris") {
             audioManager.PlaySound("Ambience");
+        }
+
+        if(SceneManager.GetActiveScene().name == "Game Over") {
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+            audioManager.PlaySound("Ambience");
+        }
+
+        if(SceneManager.GetActiveScene().name == "Outro") {
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+
+            //finds all texts & sets it to the chosen size
+            TextMeshProUGUI[] texts = FindObjectsOfType<TextMeshProUGUI>();
+            for(int i = 0; i < texts.Length; i++) {
+                texts[i].fontSize = subtitleSize;
+            }
+
+            GameObject englishSub = GameObject.Find("English Subtitles");
+            GameObject dutchSub = GameObject.Find("Dutch Subtitles");
+            if(language == "English") {
+                englishSub.SetActive(true);
+                dutchSub.SetActive(false);
+            } else if(language == "Dutch") {
+                englishSub.SetActive(false);
+                dutchSub.SetActive(true);
+            }
         }
     } 
 

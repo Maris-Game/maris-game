@@ -14,8 +14,6 @@ public class Interaction : MonoBehaviour, IDataPersistence
     public TextMeshProUGUI doorText;
     public PlayerMovement playerMovement;
 
-    public bool english;
-    public bool dutch;
 
     private void Awake() {
 
@@ -38,25 +36,25 @@ public class Interaction : MonoBehaviour, IDataPersistence
         if(interactable != null) {
             if(interactable.interactSort[interactable.arrayIndex] == "Collectible") {
                 
-                if(english) {
+                if(GameManager.instance.language == "English") {
                     collectibleText.text = "Press " + GameManager.instance.inputManager.interactKey.ToString() + " to collect";
-                } else if(dutch) {
+                } else if(GameManager.instance.language == "Dutch") {
                     collectibleText.text = "Klik " + GameManager.instance.inputManager.interactKey.ToString() + " om op te pakken";
                 }
                 collectibleText.gameObject.SetActive(true);
 
             } else if(interactable.interactSort[interactable.arrayIndex] == "Bomb") {
                 if(GameManager.instance.canMakeBomb) {
-                    if(english) {
+                    if(GameManager.instance.language == "English") {
                         bombText.text = "Press " + GameManager.instance.inputManager.interactKey.ToString() + " to make bomb";
-                    } else if(dutch) {
+                    } else if(GameManager.instance.language == "Dutch") {
                         bombText.text = "Klik " + GameManager.instance.inputManager.interactKey.ToString() + " om bom te maken";
                     }
                     
                 } else {
-                    if(english) {
+                    if(GameManager.instance.language == "English") {
                         bombText.text = "Still need " + (3 - GameManager.instance.collectiblesCollected) + " objects";
-                    } else if(dutch) {
+                    } else if(GameManager.instance.language == "Dutch") {
                         bombText.text = "Nog " + (3 - GameManager.instance.collectiblesCollected) + " objecten nodig";
                     }
                     
@@ -65,9 +63,9 @@ public class Interaction : MonoBehaviour, IDataPersistence
 
             } else if(interactable.interactSort[interactable.arrayIndex] == "Door") {
                 if(!interactable.gameObject.GetComponent<Door>().opened) {
-                    if(english) {
+                    if(GameManager.instance.language == "English") {
                         doorText.text = "Press " + GameManager.instance.inputManager.interactKey.ToString() + " to open door";
-                    } else if(dutch) {
+                    } else if(GameManager.instance.language == "Dutch") {
                         doorText.text = "Klik " + GameManager.instance.inputManager.interactKey.ToString() + " om deur te openen";
                     }
                 }
@@ -82,7 +80,7 @@ public class Interaction : MonoBehaviour, IDataPersistence
                     Debug.Log("Made Bomb");
                     if(GameManager.instance.canMakeBomb) {
                         playerMovement.StartCoroutine("Win");
-                        playerMovement.cam.GetComponent<MouseLook>().Win();
+                        playerMovement.mainCam.GetComponent<MouseLook>().Win();
                         bombText.gameObject.SetActive(false);
                     }
                 }
@@ -99,8 +97,6 @@ public class Interaction : MonoBehaviour, IDataPersistence
     }
 
     public void LoadData(GameData data) {
-        english = data.english;
-        dutch = data.dutch;
     }
 
     public void SaveData(ref GameData data) {

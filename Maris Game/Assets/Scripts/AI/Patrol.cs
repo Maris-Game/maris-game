@@ -32,7 +32,7 @@ public class Patrol : MonoBehaviour
     }
 
     public void DoPatrol() {
-        if(!doPatrol) {
+        if(!doPatrol || !AIcontroller.canMove) {
             return;
         }
 

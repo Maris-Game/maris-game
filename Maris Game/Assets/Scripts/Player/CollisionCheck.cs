@@ -6,7 +6,8 @@ public class CollisionCheck : MonoBehaviour
 {
     private void OnCollisionEnter(Collision other) {
         if(other.gameObject.tag == "AI") {
-            GameManager.instance.GameOver();
+            other.gameObject.GetComponent<AIController>().StartCoroutine("GameOver");
+            this.gameObject.GetComponent<PlayerMovement>().StartCoroutine("GameOver");
         }
     }
 }

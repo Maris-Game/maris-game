@@ -61,6 +61,10 @@ MonoBehaviour:
   canMakeBomb: 0
   gameOver: 0
   fullScreen: 0
+  Vsync: 0
+  subtitles: 0
+  subtitleSize: 0
+  language: English
 --- !u!114 &2414105340757899717
 MonoBehaviour:
   m_ObjectHideFlags: 0

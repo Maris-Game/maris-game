@@ -8,13 +8,12 @@ public class PauseMenu : MonoBehaviour
 {
     private GameManager gameManager;
     private InputManager inputManager;
-    private SettingsMenu settingsMenu;
-    private GameObject pauseMenuUI;
-    private TextMeshProUGUI curText;
-    public static bool paused = false;
+    public SettingsMenu settingsMenu;
+    public GameObject pauseMenuUI;
+    public TextMeshProUGUI curText;
 
     private void Awake() {
-        pauseMenuUI = GameObject.Find("Pause Menu");
+        //pauseMenuUI = GameObject.Find("Pause Menu");
         pauseMenuUI.SetActive(false);
         gameManager = GameManager.instance;
         settingsMenu = FindObjectOfType<SettingsMenu>();
@@ -27,16 +26,18 @@ public class PauseMenu : MonoBehaviour
     }
 
     public void Pause() {
-        if(!paused) {
-            paused = true;
+        if(!GameManager.instance.paused) {
+            GameManager.instance.paused = true;
             Time.timeScale = 0;
             Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
             pauseMenuUI.SetActive(true);
 
         } else {
-            paused = false;
+            GameManager.instance.paused = false;
             Time.timeScale = 1;
             Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
             pauseMenuUI.SetActive(false);
         }
     }

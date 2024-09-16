@@ -10,6 +10,14 @@ public class SettingsMenu : MonoBehaviour, IDataPersistence
 {
     private InputManager inputManager;
     public Resolution[] resolutions;
+    public int resIndex;
+
+    public int[] sizes;
+    public string[] sizeEngTexts;
+    public string[] sizeNLTexts;
+    public int sizeIndex;
+    public string[] languages;
+    public int languageIndex;
 
     public bool askingInput = false;
     public float sensValueUIDelay = 2f;
@@ -18,7 +26,6 @@ public class SettingsMenu : MonoBehaviour, IDataPersistence
     public Resolution curRes;
     public int resWidth;
     public int resHeight;
-    public int resIndex;
     public bool english;
     public bool dutch;
     public bool subtitles;
@@ -39,14 +46,18 @@ public class SettingsMenu : MonoBehaviour, IDataPersistence
     [Header("UI objects")]
     public Slider sensXSlider;
     public Slider sensYSlider;
+    public TextMeshProUGUI resolutionUI;
     public Toggle fullScreenToggle;
     public Toggle vSyncToggle;
     public Toggle subtitlesToggle;
-    public TMP_Dropdown languageDropdown;
+    public TextMeshProUGUI sizeUI;
+    public TextMeshProUGUI languageUI;
     public TextMeshProUGUI curText;
-    public TextMeshProUGUI resolutionUI;
+    
+    
 
-    [Header("Text")] 
+    [Header("Text (for languages)")]
+    //Main Settings
     public TextMeshProUGUI gameText;
     public TextMeshProUGUI sensXText;
     public TextMeshProUGUI sensYText;
@@ -54,7 +65,10 @@ public class SettingsMenu : MonoBehaviour, IDataPersistence
     public TextMeshProUGUI fullScreenText;
     public TextMeshProUGUI vSyncText;
     public TextMeshProUGUI subtitlesText;
+    public TextMeshProUGUI sizeText;
     public TextMeshProUGUI languageText;
+
+    //Control Settings
     public TextMeshProUGUI controlsText;
     public TextMeshProUGUI forwardText;
     public TextMeshProUGUI backwardText;
@@ -154,18 +168,6 @@ public class SettingsMenu : MonoBehaviour, IDataPersistence
         subtitles = toggle.isOn;
     }
 
-    public void LanguageChange(TMP_Dropdown other) {
-        if(other.value == 0) {
-            english = true;
-            dutch = false;
-        } else if(other.value == 1) {
-            dutch = true;
-            english = false;
-        }
-
-        UpdateMenu();
-    }
-
     public void ChangeSens(Slider slider) {
         if(slider.name =="SensX Slider") {
             GameManager.instance.inputManager.sensX = slider.value;
@@ -194,6 +196,42 @@ public class SettingsMenu : MonoBehaviour, IDataPersistence
         resolutionUI.text = resolutions[resIndex].width + " x " + resolutions[resIndex].height;
         Screen.SetResolution(resolutions[resIndex].width, resolutions[resIndex].height, fullScreen);
         curRes = Screen.currentResolution;
+        GameManager.instance.curRes = Screen.currentResolution;
+    }
+
+    public void SetSize(string dir) {
+        if(dir == "Left") {
+            sizeIndex--;
+            if(sizeIndex < 0) {
+                sizeIndex = 0;
+            } 
+        } else if(dir == "Right") {
+            sizeIndex++;
+            if(sizeIndex > sizes.Length - 1) {
+                sizeIndex = sizes.Length - 1;
+            }
+        }
+
+        sizeUI.text = sizeEngTexts[sizeIndex].ToString();
+        GameManager.instance.subtitleSize = sizes[sizeIndex];
+    }
+
+    public void SetLanguage(string dir) {
+        if(dir == "Left") {
+            languageIndex--;
+            if(languageIndex < 0) {
+                languageIndex = 0;
+            } 
+        } else if(dir == "Right") {
+            languageIndex++;
+            if(languageIndex > languages.Length - 1) {
+                languageIndex = languages.Length - 1;
+            }
+        }
+
+        languageUI.text = languages[languageIndex];
+        GameManager.instance.language = languages[languageIndex];
+        UpdateMenu();
     }
 
     public void GetText(TextMeshProUGUI text) {
@@ -220,15 +258,21 @@ public class SettingsMenu : MonoBehaviour, IDataPersistence
     }
     
     public void UpdateMenu() {
-        if(english) {
-            languageDropdown.value = 0;
+        if(GameManager.instance.language == "English") {
+            //main settings
             gameText.text = "Game";
             sensXText.text = "Mouse Sensitivity X";
             sensYText.text = "Mouse Sensitivity Y";
             resText.text = "Resolution";
             fullScreenText.text = "Fullscreen";
             vSyncText.text = "V-Sync";
+            subtitlesText.text = "Subtitles";
+            sizeText.text = "Size";
+            sizeUI.text = sizeEngTexts[sizeIndex];
             languageText.text = "Language";
+            languageUI.text = "English";
+
+            //control settings
             controlsText.text = "Controls";
             forwardText.text = "Forward:";
             backwardText.text = "Backward:";
@@ -240,15 +284,21 @@ public class SettingsMenu : MonoBehaviour, IDataPersistence
             clothesOnText.text = "Clothes On:";
             interactText.text = "Interact:";
 
-        } else if(dutch) {
-            languageDropdown.value = 1;
+        } else if(GameManager.instance.language == "Nederlands") {
+            //Main Settings
             gameText.text = "Spel";
             sensXText.text = "Muis Sensitivity X";
             sensYText.text = "Muis Sensitivity Y";
             resText.text = "Resolutie";
             fullScreenText.text = "Fullscreen";
             vSyncText.text = "V-Sync";
+            subtitlesText.text = "Ondertiteling";
+            sizeText.text = "Grootte";
+            sizeUI.text = sizeNLTexts[sizeIndex];
             languageText.text = "Taal";
+            languageUI.text = "Nederlands";
+
+            //Control Settings
             controlsText.text = "Controls";
             forwardText.text = "Voor:";
             backwardText.text = "Achter:";
@@ -277,13 +327,15 @@ public class SettingsMenu : MonoBehaviour, IDataPersistence
             controlSettings.SetActive(false);
             game = true;
             control = false;
-            
+
+            Color darkgray = new Color(0.1411765f, 0.1411765f, 0.1411765f, 1f);
             var colors = other.colors;
-            colors.normalColor = Color.black;
-            colors.highlightedColor = Color.black;
-            colors.pressedColor = Color.black;
-            colors.selectedColor = Color.black;
+            colors.normalColor = darkgray;
+            colors.highlightedColor = darkgray;
+            colors.pressedColor = darkgray;
+            colors.selectedColor = darkgray;
             other.colors = colors;
+
 
             colors = but.colors;
             colors.normalColor = Color.white;
@@ -306,12 +358,14 @@ public class SettingsMenu : MonoBehaviour, IDataPersistence
             control = true;
             game = false;
 
+            Color darkgray = new Color(0.1411765f, 0.1411765f, 0.1411765f, 1f);
             var colors = other.colors;
-            colors.normalColor = Color.black;
-            colors.highlightedColor = Color.black;
-            colors.pressedColor = Color.black;
-            colors.selectedColor = Color.black;
+            colors.normalColor = darkgray;
+            colors.highlightedColor = darkgray;
+            colors.pressedColor = darkgray;
+            colors.selectedColor = darkgray;
             other.colors = colors;
+
 
             colors = but.colors;
             colors.normalColor = Color.white;
@@ -326,19 +380,15 @@ public class SettingsMenu : MonoBehaviour, IDataPersistence
     }
 
     public void LoadData(GameData data) {
-        this.english = data.english;
-        this.dutch = data.dutch;
         this.subtitles = data.subtitles;
         this.curRes.width = data.resolutionWidth;
         this.curRes.height = data.resolutionHeight;
         this.fullScreen = data.fullScreen;
         this.vSync = data.vSync;
+        
         if (vSync) 
-        {
-            QualitySettings.vSyncCount = 1;
-        } else {
-            QualitySettings.vSyncCount = 0;
-        }
+        { QualitySettings.vSyncCount = 1; } 
+        else { QualitySettings.vSyncCount = 0; }
 
         if(curRes.width == 0 && curRes.height == 0) {
             curRes = Screen.currentResolution;
@@ -352,12 +402,16 @@ public class SettingsMenu : MonoBehaviour, IDataPersistence
             }
         }
 
+        for(int i = 0; i < sizes.Length; i++) {
+            if(sizes[i] == data.subtitleSize) {
+                sizeIndex = i;
+            }
+        }
+
         Invoke("UpdateMenu", 0.1f);
     }
 
     public void SaveData(ref GameData data) {
-        data.english = this.english;
-        data.dutch = this.dutch;
         data.subtitles = this.subtitles;
         data.resolutionWidth = curRes.width;
         data.resolutionHeight = curRes.height;

@@ -17,6 +17,7 @@ public class AIController : MonoBehaviour
     private Patrol patrol;
     public Subtitles subtitles;
 
+    [Header("AI settings")]
     public bool chase;
     public bool chasing;
     public bool seen;
@@ -28,6 +29,7 @@ public class AIController : MonoBehaviour
     public float fov;
     public bool walking = false;
 
+    [Header("Audio")]
     public string[] normalSounds;
     public string[] kapjeSounds;
     public string[] jasSounds;
@@ -46,6 +48,8 @@ public class AIController : MonoBehaviour
     [Header("Hearing")]
     public bool hearingPlayer = false;
 
+    public bool canMove = true;
+
 
     private void Start() {
         audioSource = GetComponent<AudioSource>();
@@ -53,10 +57,29 @@ public class AIController : MonoBehaviour
         sc = GetComponent<SphereCollider>();
         agent = GetComponent<NavMeshAgent>();
         player = GameObject.Find("Player");
-        kledingScript = player.GetComponent<Kleding>();
+        kledingScript = GameObject.Find("Camera Holder").transform.GetChild(0).GetComponent<Kleding>();
     }
 
     private void Update() {
+        if(walking) {
+
+            if(!this.walkingAudio.isPlaying) {
+                AudioClip clip = GameManager.instance.audioManager.FindClip("Walking");
+                this.walkingAudio.clip = clip;
+                this.walkingAudio.Play();
+            }
+            
+        } else if (GameManager.instance.paused) {
+            this.walkingAudio.Stop(); 
+        } else {
+            this.walkingAudio.Stop();
+        }
+        
+
+        if(!canMove) { 
+            walking = false;
+            return; 
+        }
         
         rayStartPos = new Vector3(transform.position.x, transform.position.y + yOffset, transform.position.z);
         rayDirection = player.transform.position - this.transform.position;
@@ -126,19 +149,6 @@ public class AIController : MonoBehaviour
         if(GameManager.instance.collectiblesCollected == 3) {
             agent.speed = 8f;
         }
-
-        if(walking) {
-
-            if(!this.walkingAudio.isPlaying) {
-                AudioClip clip = GameManager.instance.audioManager.FindClip("Walking");
-                this.walkingAudio.clip = clip;
-                this.walkingAudio.Play();
-                Debug.Log("Play Walking Sound");
-            }
-            
-        } else if(!walking) {
-            this.walkingAudio.Stop();
-        }
     }
 
     public void RotateToPlayer() {
@@ -159,7 +169,30 @@ public class AIController : MonoBehaviour
     }
 
     private void Chase() {
+        if(!canMove) {
+            return;
+        }
+        
         agent.SetDestination(player.transform.position);
+    }
+
+    IEnumerator GameOver() {
+        GetComponent<CapsuleCollider>().enabled = false;
+        agent.enabled = false;
+
+        float speed = 1f;
+        float time = 0f;
+        float duration = 1f;
+        Quaternion previousRot = transform.rotation;
+        Vector3 orgPos = transform.position;
+        while (time < duration) {
+            time += Time.deltaTime; 
+            this.transform.rotation = Quaternion.Lerp(this.transform.rotation, new Quaternion(12.85f, previousRot.y, previousRot.z, previousRot.w), speed * Time.deltaTime);
+            this.transform.position = Vector3.Lerp(this.transform.position, new Vector3(orgPos.x, 0.92f, orgPos.z), speed * Time.deltaTime);
+            yield return null;
+        }
+
+        
     }
 
     public void PlayRandomSound() {

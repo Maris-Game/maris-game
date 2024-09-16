@@ -69,7 +69,6 @@ public class DataPersistenceManager : MonoBehaviour
 
         //push data to scripts
         foreach(IDataPersistence dataPersistenceObj in DataPersistenceObjects) {
-            Debug.Log(dataPersistenceObj);
             dataPersistenceObj.LoadData(gameData);
         }
     }
